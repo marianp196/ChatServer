@@ -1,0 +1,1 @@
+﻿Wenn client eine nachricht gelesen hat, dann kann er bestätigung an sender schicken

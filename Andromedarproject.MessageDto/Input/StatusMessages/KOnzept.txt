@@ -1,0 +1,4 @@
+﻿Client sendet statusnachrichten
+
+Client subscribed sich auf andere clients und deren Textnachrichten -> Verteilung über Gruppenkonzept lösen
+
