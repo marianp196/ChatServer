@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Andromedarproject.MessageDto.Input.TextMessages
 {
-    public class MessageDto : BasicInputMessage
+    public class TextInputMessage : BasicInputMessage
     {       
         public IEnumerable<Attechment> Attechments { get; set; }
         public IEnumerable<string> Content{ get; set; }       

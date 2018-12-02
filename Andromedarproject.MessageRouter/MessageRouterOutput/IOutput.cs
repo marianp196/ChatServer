@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Andromedarproject.MessageRouter.MessageRouterOutput
 {
-    public interface IServerNetworkOutput : IOutput
-    {}
+    public interface IOutput
+    {        
+        void Send(BasicOutputMessage basicOutputMessage);
+    }
 }

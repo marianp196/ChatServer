@@ -25,6 +25,11 @@ namespace Andromedarproject.MessageDto.Adresses
             return Server + "::" + Name + "::" + AdressType.ToString();
         }
 
+        public bool IsOnHomeServerByProtocoll(string serverName)
+        {
+            return Server.ToLower() == "home" || serverName.ToLower() == Server.ToLower();
+        }
+
         public override bool Equals(object obj)
         {
             var adress = obj as Adress;

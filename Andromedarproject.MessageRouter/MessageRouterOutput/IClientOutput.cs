@@ -2,8 +2,6 @@
 
 namespace Andromedarproject.MessageRouter.MessageRouterOutput
 {
-    public interface IClientOutput
-    {
-        void Send(BasicOutputMessage basicOutputMessage);
-    }
+    public interface IClientOutput : IOutput
+    {}
 }
