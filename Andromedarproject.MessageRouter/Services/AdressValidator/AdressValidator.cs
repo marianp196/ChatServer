@@ -37,7 +37,7 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
 
         private void checkGroupExists(string name)
         {
-            if (!_userReader.TryGetByName(name, out var obj))
+            if (!_groupReader.TryGetByName(name, out var obj))
                 throw new AdressNotValidException("Group doesn't exist");
         }
 

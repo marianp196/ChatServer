@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using Andromedarproject.MessageDto.Adresses;
+using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
+using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.TargetTypeCases;
+
+namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches
+{
+    public class ContentRouterTargetTypeCaseSwitch<TContent> : BasicRouter<TContent>
+    {      
+
+        public ContentRouterTargetTypeCaseSwitch(IContentRouter<TContent> next, 
+                                                IEnumerable<ITargetTypeCase<TContent>> messageTypeCases,
+                                                IOutput<TContent> output) : base(next)
+        {
+            _messageTypeCases = messageTypeCases ?? throw new ArgumentNullException(nameof(messageTypeCases));
+            _output = output ?? throw new ArgumentNullException(nameof(output));
+        }
+
+        public override void Rout(Adress sender, Adress target, TContent content)
+        {
+            ITargetTypeCase<TContent> messageTypeCase = getCase(target.AdressType);
+            if (messageTypeCase == null)
+                throw new Exception("Address Type not Known. Can't be routet");
+
+            var outputMessages = messageTypeCase.GetOutputs(sender, target, content);
+
+            foreach (var outputMessage in outputMessages)
+                _output.Send(outputMessage);
+
+        }
+
+        private ITargetTypeCase<TContent> getCase(EAdressType adressType)
+        {
+            foreach (var messageCase in _messageTypeCases)
+                if (messageCase.IsResponsible(adressType))
+                    return messageCase;
+            return null;
+        }
+
+        private readonly IEnumerable<ITargetTypeCase<TContent>> _messageTypeCases;
+        private readonly IOutput<TContent> _output;
+    }
+}

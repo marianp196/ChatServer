@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Andromedarproject.Users.Abstractions.Groups
 {
-    public class IGroupReader
+    public interface IGroupReader
     {
         bool TryGetByName(string name, out Group group);
     }
