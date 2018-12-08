@@ -9,9 +9,9 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCase
     public class ContentRouterTargetTypeCaseSwitch<TContent> : BasicRouter<TContent>
     {      
 
-        public ContentRouterTargetTypeCaseSwitch(IContentRouter<TContent> next, 
-                                                IEnumerable<ITargetTypeCase<TContent>> messageTypeCases,
-                                                IOutput<TContent> output) : base(next)
+        public ContentRouterTargetTypeCaseSwitch(IEnumerable<ITargetTypeCase<TContent>> messageTypeCases,
+                                                IOutput<TContent> output,
+                                                IContentRouter<TContent> next) : base(next)
         {
             _messageTypeCases = messageTypeCases ?? throw new ArgumentNullException(nameof(messageTypeCases));
             _output = output ?? throw new ArgumentNullException(nameof(output));

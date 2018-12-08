@@ -6,7 +6,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters.Validators
 {
     public class ContentRouterInputSenderValidator<TContent> : BasicRouter<TContent>
     {
-        public ContentRouterInputSenderValidator(IContentRouter<TContent> next, ISenderAddressValidator senderAdressValidator) : base(next)
+        public ContentRouterInputSenderValidator(ISenderAddressValidator senderAdressValidator, IContentRouter<TContent> next) : base(next)
         {
             _senderAdressValidator = senderAdressValidator ?? throw new ArgumentNullException(nameof(senderAdressValidator));
         }

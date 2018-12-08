@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
+using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.MessageInputOutputConverter;
 using Andromedarproject.Users.Abstractions.Groups;
 
 namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.TargetTypeCases
 {
-    public class GroupTypeSwitch<TContent> : TragetTypeCase<TContent>
+    public class GroupTypeCase<TContent> : TragetTypeCase<TContent>
     {       
 
-        public GroupTypeSwitch(IInputOutputConverter<TContent> converter, IGroupReader groupReader) : base(converter)
+        public GroupTypeCase(IInputOutputConverter<TContent> converter, IGroupReader groupReader) : base(converter)
         {
             _groupReader = groupReader ?? throw new ArgumentNullException(nameof(groupReader));
         }
