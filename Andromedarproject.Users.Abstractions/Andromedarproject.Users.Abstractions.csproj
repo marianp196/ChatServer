@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Andromedarproject.MessageDto\Andromedarproject.MessageDto.csproj" />
-    <ProjectReference Include="..\Andromedarproject.Users.Abstractions\Andromedarproject.Users.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

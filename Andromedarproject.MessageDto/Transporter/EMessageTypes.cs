@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageDto.Input
+namespace Andromedarproject.MessageDto.Transporter
 {
     public enum EMessageTypes
     {

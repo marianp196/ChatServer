@@ -1,9 +1,7 @@
 ﻿using Andromedarproject.MessageDto.Adresses;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Andromedarproject.MessageRouter.MessageRouterInput.Users
+namespace Andromedarproject.Users.Abstractions
 {
     public class User
     {

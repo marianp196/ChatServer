@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.MessageRouterInput.Users
+namespace Andromedarproject.Users.Abstractions
 {
     public interface IUserReader
     {

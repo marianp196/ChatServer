@@ -2,12 +2,12 @@
 
 namespace Andromedarproject.MessageDto.Input
 {
-    public class BasicInputMessage
+    public class Address<TContent>
     {
         public Adress Target { get; set; }
         public Adress Sender { get; set; }
-        public string AuthString { get; set; }
-        public EMessageTypes MessageType { get; set; }
+
+        public TContent Content { get; set; }
 
         /// <summary>
         /// Senderadresse muss gesetzt sein und Valide

@@ -2,13 +2,14 @@
 
 namespace Andromedarproject.MessageDto.Output
 {
-    public class BasicOutputMessage
+    public class BasicOutputMessage<TContent>
     {
         public Adress Sender { get; set; }
         public Adress SenderGroup { get; set; }
-
         public Adress Target { get; set; } 
-        public EMessageTypes MessageType { get; set; }
+
+
+        public TContent Content { get; set; }
 
         /// <summary>
         /// Senderadresse muss gesetzt sein und Valide
