@@ -7,6 +7,7 @@ using Andromedarproject.MessageRouter.Services;
 using AndromededarProject.Web.ClientInputHubs;
 using AndromededarProject.Web.InstanceInformations;
 using AndromededarProject.Web.Output.Moq;
+using AndromededarProject.Web.UserGroups.Moq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,9 +32,13 @@ namespace AndromededarProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-           /* services.TryAddInstanceInformation().
+
+            services.TryAddUserGroupMoq();
+
+            services.TryAddInstanceInformation().
                 TryAddOutputMoq<TextContent>().
-                TryAddServices<TextContent>();*/
+                TryAddServices<TextContent>();
+
             services.AddSignalR();
         }
 

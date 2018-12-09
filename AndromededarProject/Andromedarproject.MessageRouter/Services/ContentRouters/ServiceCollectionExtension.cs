@@ -16,9 +16,9 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters
     {
         public static IServiceCollection TryAddContentRouter<TContent>(this IServiceCollection serviceCollection)
         {
-            serviceCollection.TryAddMessageInputOutputConverter().AddTargetTypeCases();
+            serviceCollection.TryAddMessageInputOutputConverter<TContent>().AddTargetTypeCases<TContent>();
 
-            serviceCollection.TryAddTransient(typeof(IContentRouter<>), sp =>
+            serviceCollection.TryAddTransient<IContentRouter<TContent>>( sp =>
             {
                 return new ContentRouterInputValidator<TContent>(
                        new ContentRouterInputSenderValidator<TContent>(sp.GetService<ISenderAddressValidator>(),

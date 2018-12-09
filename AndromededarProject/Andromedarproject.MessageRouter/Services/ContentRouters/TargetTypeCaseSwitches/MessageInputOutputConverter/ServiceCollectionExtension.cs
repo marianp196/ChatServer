@@ -9,9 +9,9 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCase
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection TryAddMessageInputOutputConverter(this IServiceCollection serviceCollection)
+        public static IServiceCollection TryAddMessageInputOutputConverter<TContent>(this IServiceCollection serviceCollection)
         {
-            serviceCollection.TryAddTransient(typeof(IInputOutputConverter<>), typeof(InputOutputConverter<>));
+            serviceCollection.TryAddTransient<IInputOutputConverter<TContent>, InputOutputConverter<TContent>>();
             return serviceCollection;
         }
     }

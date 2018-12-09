@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Andromedarproject.MessageDto.Adresses
 {
-    public abstract class Adress
+    public class Adress
     {
         public EAdressType AdressType { get; set;}
         public string Name { get; set; }

@@ -1,19 +1,17 @@
 ﻿using Andromedarproject.MessageDto.Contents;
-using Andromedarproject.MessageDto.Input;
 using Andromedarproject.MessageRouter.Services.ContentRouters;
+using Andromedarproject.Users.Abstractions;
 using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ClientInputHubs
 {
     public class TextContentMessageInput : Hub
     {
-        public TextContentMessageInput(/*IContentRouter<TextContent> router*/)
+        public TextContentMessageInput(IUserReader provider)
         {
-            //_router = router ?? throw new ArgumentNullException(nameof(router));
+           // _router = provider.
         }
 
         public async Task SendTextMessage(string user, /*BasicInputMessage<TextContent>*/ string message)
