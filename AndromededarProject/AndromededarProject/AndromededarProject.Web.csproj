@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Andromedarproject.MessageDto\Andromedarproject.MessageDto.csproj" />
     <ProjectReference Include="..\Andromedarproject.MessageRouter\Andromedarproject.MessageRouter.csproj" />
   </ItemGroup>
 

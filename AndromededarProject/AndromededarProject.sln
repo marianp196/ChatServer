@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndromededarProject.Web", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andromedarproject.MessageRouter", "Andromedarproject.MessageRouter\Andromedarproject.MessageRouter.csproj", "{66BC3D80-9355-4805-9611-B6A2F894F49D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andromedarproject.MessageDto", "Andromedarproject.MessageDto\Andromedarproject.MessageDto.csproj", "{84868C22-27DC-4743-B953-BBB733283B1E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andromedarproject.Users.Abstractions", "Andromedarproject.Users.Abstractions\Andromedarproject.Users.Abstractions.csproj", "{EE8CF490-0C36-4033-B832-74CC3A5F7265}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRChatClient", "Test.Clients\SignalRChatClient\SignalRChatClient\SignalRChatClient.csproj", "{DC5E35C2-BE43-430E-B5D1-3F4552E18B3A}"
@@ -27,10 +25,6 @@ Global
 		{66BC3D80-9355-4805-9611-B6A2F894F49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66BC3D80-9355-4805-9611-B6A2F894F49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66BC3D80-9355-4805-9611-B6A2F894F49D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84868C22-27DC-4743-B953-BBB733283B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84868C22-27DC-4743-B953-BBB733283B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84868C22-27DC-4743-B953-BBB733283B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84868C22-27DC-4743-B953-BBB733283B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Release|Any CPU.ActiveCfg = Release|Any CPU
