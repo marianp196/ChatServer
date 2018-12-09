@@ -53,7 +53,7 @@ namespace AndromededarProject
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<TextContentMessageInput>("/TextContentMessageInput");
+                routes.MapHub<TextContentMessageInput>("/TextMessageInput");
             });
 
             app.UseMvc();

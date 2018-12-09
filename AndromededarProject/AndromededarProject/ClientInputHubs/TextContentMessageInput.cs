@@ -16,7 +16,7 @@ namespace AndromededarProject.Web.ClientInputHubs
             //_router = router ?? throw new ArgumentNullException(nameof(router));
         }
 
-        public async Task InputTextContentMessage(string user, /*BasicInputMessage<TextContent>*/ string message)
+        public async Task SendTextMessage(string user, /*BasicInputMessage<TextContent>*/ string message)
         {
             //_router.Rout(message.Sender, message.Target, message.Content);
             Console.WriteLine(message);
