@@ -21,13 +21,14 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCase
         {
             ITargetTypeCase<TContent> messageTypeCase = getCase(target.AdressType);
             if (messageTypeCase == null)
-                throw new Exception("Address Type not Known. Can't be routet");
+                throw new Exception("Address Type not Known. Can't be routed");
 
             var outputMessages = messageTypeCase.GetOutputs(sender, target, content);
 
             foreach (var outputMessage in outputMessages)
                 _output.Send(outputMessage);
 
+            Next(sender, target, content);
         }
 
         private ITargetTypeCase<TContent> getCase(EAdressType adressType)

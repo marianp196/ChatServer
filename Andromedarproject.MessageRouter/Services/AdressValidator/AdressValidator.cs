@@ -11,7 +11,7 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
 {
     public class AdressValidator : IAddressValidator
     {
-        public AdressValidator(IUserReader userReader,IGroupReader groupReader, IInstanceInformation instanceInforrmation)
+        public AdressValidator(IUserReader userReader, IGroupReader groupReader, IInstanceInformation instanceInforrmation)
         {
             _userReader = userReader ?? throw new ArgumentNullException(nameof(userReader));
             _groupReader = groupReader ?? throw new ArgumentNullException(nameof(groupReader));
@@ -24,6 +24,7 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
                 throw new AdressNotValidException("sender");
             if (!address.IsOnHomeServerByProtocoll(_instanceInforrmation.Name()))
                 return;
+            //Todo hier broadcast ausschließemn
             checkIfExists(address);
         }
 

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Andromedarproject.MessageDto.Contents;
+using Andromedarproject.MessageRouter.Services;
+using AndromededarProject.Web.ClientInputHubs;
+using AndromededarProject.Web.InstanceInformations;
+using AndromededarProject.Web.Output.Moq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +31,10 @@ namespace AndromededarProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+           /* services.TryAddInstanceInformation().
+                TryAddOutputMoq<TextContent>().
+                TryAddServices<TextContent>();*/
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +50,12 @@ namespace AndromededarProject
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<TextContentMessageInput>("/TextContentMessageInput");
+            });
+
             app.UseMvc();
         }
     }

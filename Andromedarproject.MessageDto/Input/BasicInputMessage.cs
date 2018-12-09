@@ -2,7 +2,7 @@
 
 namespace Andromedarproject.MessageDto.Input
 {
-    public class Address<TContent>
+    public class BasicInputMessage<TContent>
     {
         public Adress Target { get; set; }
         public Adress Sender { get; set; }
