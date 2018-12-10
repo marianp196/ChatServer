@@ -14,8 +14,8 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
 
         public override async Task Rout(Adress sender, Adress target, TContent content)
         {
-            _validator.Validate(target);
-            await base.Next(sender, target, content);
+            await _validator.Validate(target);
+            await Next(sender, target, content);
         }
 
         private readonly ITargetAddressValidator _validator;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
@@ -13,7 +14,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
         {
         }
 
-        public override IEnumerable<BasicOutputMessage<TContent>> GetOutputs(Adress sender, Adress target, TContent content)
+        public override async Task<IEnumerable<BasicOutputMessage<TContent>>> GetOutputs(Adress sender, Adress target, TContent content)
         {
             if (!IsResponsible(target.AdressType))
                 throw new Exception("Not Rootable for this case");

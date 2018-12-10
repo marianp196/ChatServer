@@ -1,6 +1,7 @@
 ﻿using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.Users.Abstractions;
 using Andromedarproject.Users.Abstractions.Groups;
+using Andromedarproject.Users.Abstractions.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,19 +43,22 @@ namespace AndromededarProject.Web.UserGroups.Moq
             return true;
         }
 
-        public bool TryGetByName(string name, out User user)
+        public async Task<Result<User>> TryGetByName(string name)
         {
-            user = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
-            return user == null ? false : true;                
+            var result = new Result<User>();
+            result.Value = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
+            result.Success = result.Value == null;
+            return result;
         }
 
-        public bool TryGetByName(string name, out Group group)
+        public async  Task<Result<Group>> IGroupReader.TryGetByName(string name)
         {
-            group = null;
+            var result = new Result<Group>();
             if (name != _group.Name)
-                return false;
-            group = _group;
-            return true;
+                return result; ;
+            result.Success = true;
+            result.Value = _group;
+            return result;
         }
 
         private IDictionary<Guid, User> _users = new Dictionary<Guid, User>();

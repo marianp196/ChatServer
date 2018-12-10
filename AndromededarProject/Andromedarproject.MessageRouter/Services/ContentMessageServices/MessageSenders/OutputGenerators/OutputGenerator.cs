@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
@@ -15,7 +16,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             _converter = converter;
         }
 
-        public abstract IEnumerable<BasicOutputMessage<TContent>> GetOutputs(Adress sender, Adress target, TContent content);
+        public abstract Task<IEnumerable<BasicOutputMessage<TContent>>> GetOutputs(Adress sender, Adress target, TContent content);
         public abstract bool IsResponsible(EAdressType messageType);
 
         protected BasicOutputMessage<TContent> Convert(Adress sender, Adress target, Adress group ,TContent content)

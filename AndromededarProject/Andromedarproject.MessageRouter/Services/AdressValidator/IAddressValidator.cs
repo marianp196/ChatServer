@@ -3,12 +3,13 @@ using Andromedarproject.MessageDto.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Services.AdressValidator
 {
     public interface IAddressValidator
     {
-        void Validate(Adress address);
+        Task Validate(Adress address);
     }
 
     public interface ISenderAddressValidator : IAddressValidator

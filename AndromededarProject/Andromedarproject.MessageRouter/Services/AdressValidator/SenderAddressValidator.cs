@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Services.AdressValidator.Exceptions;
 using Andromedarproject.MessageRouter.Settings;
@@ -16,13 +17,13 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
             _instanceInforrmation = instanceInforrmation ?? throw new ArgumentNullException(nameof(instanceInforrmation)); ;
         }
 
-        public void Validate(Adress address)
+        public async Task Validate(Adress address)
         {
             if (!address.IsOnHomeServerByProtocoll(_instanceInforrmation.Name()))
                 throw new SenderNotValidException("Not on this server");
             if(address.AdressType != EAdressType.User)
                 throw new SenderNotValidException("Sender has to be User");
-            _addressVaidator.Validate(address);
+            await _addressVaidator.Validate(address);
         }
 
         private readonly IAddressValidator _addressVaidator;

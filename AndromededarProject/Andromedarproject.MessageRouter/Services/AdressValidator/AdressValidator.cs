@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Services.AdressValidator.Exceptions;
 using Andromedarproject.MessageRouter.Settings;
@@ -18,33 +19,35 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
             _instanceInforrmation = instanceInforrmation ?? throw new ArgumentNullException(nameof(instanceInforrmation));
         }
 
-        public void Validate(Adress address)
+        public async Task Validate(Adress address)
         {
             if (!address.isValid())
                 throw new AdressNotValidException("sender");
             if (!address.IsOnHomeServerByProtocoll(_instanceInforrmation.Name()))
                 return;
             //Todo hier broadcast ausschließemn
-            checkIfExists(address);
+            await checkIfExists(address);
         }
 
-        private void checkIfExists(Adress address)
+        private async Task checkIfExists(Adress address)
         {
             if (address.AdressType == EAdressType.User)
-                checkUserExists(address.Name);
+                await checkUserExists(address.Name);
             else if (address.AdressType == EAdressType.Group)
-                checkGroupExists(address.Name);
+                await checkGroupExists(address.Name);
         }
 
-        private void checkGroupExists(string name)
+        private async Task checkGroupExists(string name)
         {
-            if (!_groupReader.TryGetByName(name, out var obj))
+            var result = await _groupReader.TryGetByName(name);
+            if (!result.Success)
                 throw new AdressNotValidException("Group doesn't exist");
         }
 
-        private void checkUserExists(string name)
+        private async Task checkUserExists(string name)
         {
-            if (!_userReader.TryGetByName(name, out var obj))
+            var result = await _userReader.TryGetByName(name);
+            if (!result.Success)
                 throw new AdressNotValidException("Address doesn't exist");
             
         }

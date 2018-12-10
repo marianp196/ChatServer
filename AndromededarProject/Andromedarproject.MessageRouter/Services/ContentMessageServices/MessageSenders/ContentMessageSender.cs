@@ -24,7 +24,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             if (messageTypeCase == null)
                 throw new Exception("Address Type not Known. Can't be routed");
 
-            var outputMessages = messageTypeCase.GetOutputs(sender, target, content);
+            var outputMessages = await messageTypeCase.GetOutputs(sender, target, content);
 
             foreach (var outputMessage in outputMessages)
                await _output.Send(outputMessage);

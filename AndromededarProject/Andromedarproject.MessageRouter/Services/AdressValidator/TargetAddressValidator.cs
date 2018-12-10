@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Settings;
 
@@ -14,9 +15,9 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
             _instanceInforrmation = instanceInforrmation ?? throw new ArgumentNullException(nameof(instanceInforrmation)); ;
         }
 
-        public void Validate(Adress address)
+        public async Task Validate(Adress address)
         {
-            _addressVaidator.Validate(address);
+            await _addressVaidator.Validate(address);
            
         }
 
