@@ -39,14 +39,14 @@ namespace Andromedarproject.MessageRouter.Services.AdressValidator
 
         private async Task checkGroupExists(string name)
         {
-            var result = await _groupReader.TryGetByName(name);
+            var result = await _groupReader.GetGroup(name);
             if (!result.Success)
                 throw new AdressNotValidException("Group doesn't exist");
         }
 
         private async Task checkUserExists(string name)
         {
-            var result = await _userReader.TryGetByName(name);
+            var result = await _userReader.GetUser(name);
             if (!result.Success)
                 throw new AdressNotValidException("Address doesn't exist");
             

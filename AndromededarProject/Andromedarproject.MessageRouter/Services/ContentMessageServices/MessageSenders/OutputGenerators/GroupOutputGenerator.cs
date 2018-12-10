@@ -22,7 +22,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             if (!IsResponsible(target.AdressType))
                 throw new Exception("Not responsible");
 
-            var groupResult = await _groupReader.TryGetByName(target.Name);
+            var groupResult = await _groupReader.GetGroup(target.Name);
             if (!groupResult.Success)
                 throw new Exception("Cant find group");
 

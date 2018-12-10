@@ -43,15 +43,15 @@ namespace AndromededarProject.Web.UserGroups.Moq
             return true;
         }
 
-        public async Task<Result<User>> TryGetByName(string name)
+        public async Task<Result<User>> GetUser(string name)
         {
             var result = new Result<User>();
             result.Value = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
-            result.Success = result.Value == null;
+            result.Success = result.Value != null;
             return result;
         }
 
-        public async  Task<Result<Group>> IGroupReader.TryGetByName(string name)
+        public async  Task<Result<Group>> GetGroup(string name)
         {
             var result = new Result<Group>();
             if (name != _group.Name)

@@ -8,7 +8,7 @@ namespace Andromedarproject.Users.Abstractions
 {
     public interface IUserReader
     {
-        Task<Result<User>> TryGetByName(string name);
+        Task<Result<User>> GetUser(string name);
         bool PasswordValid(User user, string input);
     }
 }

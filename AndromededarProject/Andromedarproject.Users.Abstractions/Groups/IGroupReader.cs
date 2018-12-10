@@ -8,6 +8,6 @@ namespace Andromedarproject.Users.Abstractions.Groups
 {
     public interface IGroupReader
     {
-        Task<Result<Group>> TryGetByName(string name);
+        Task<Result<Group>> GetGroup(string name);
     }
 }
