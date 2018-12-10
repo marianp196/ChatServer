@@ -5,12 +5,12 @@ using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
 {
-    public abstract class TragetTypeCase<TContent> : ITargetTypeCase<TContent>
+    public abstract class OutputGenerator<TContent> : IOutputGenerator<TContent>
     {      
 
-        public TragetTypeCase(IInputOutputConverter<TContent> converter)
+        public OutputGenerator(IInputOutputConverter<TContent> converter)
         {
             _converter = converter;
         }

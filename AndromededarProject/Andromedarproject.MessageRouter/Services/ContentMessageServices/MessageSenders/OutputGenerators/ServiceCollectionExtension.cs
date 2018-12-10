@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
 {
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddTargetTypeCases<TContent>(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<ITargetTypeCase<TContent>, UserTypeCase<TContent>>();
-            serviceCollection.AddTransient<ITargetTypeCase<TContent>, GroupTypeCase<TContent>>();
+            serviceCollection.AddTransient<IOutputGenerator<TContent>, UserOutputGenerator<TContent>>();
+            serviceCollection.AddTransient<IOutputGenerator<TContent>, GroupOutputGenerator<TContent>>();
 
             /*serviceCollection.TryAddTransient<IEnumerable<ITargetTypeCase<TContent>>>(sp =>
             {

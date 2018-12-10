@@ -6,12 +6,12 @@ using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
 using Andromedarproject.Users.Abstractions.Groups;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
 {
-    public class GroupTypeCase<TContent> : TragetTypeCase<TContent>
+    public class GroupOutputGenerator<TContent> : OutputGenerator<TContent>
     {       
 
-        public GroupTypeCase(IInputOutputConverter<TContent> converter, IGroupReader groupReader) : base(converter)
+        public GroupOutputGenerator(IInputOutputConverter<TContent> converter, IGroupReader groupReader) : base(converter)
         {
             _groupReader = groupReader ?? throw new ArgumentNullException(nameof(groupReader));
         }

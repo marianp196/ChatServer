@@ -1,4 +1,4 @@
-﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases;
+﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;

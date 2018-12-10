@@ -2,7 +2,7 @@
 using Andromedarproject.MessageRouter.Services.AdressValidator;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -23,7 +23,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
                 return new ContentMessageInputValidator<TContent>(
                        new ContentMessageSenderValidator<TContent>(sp.GetService<ISenderAddressValidator>(),
                        new ContentRouterInputTargetValidator<TContent>(sp.GetService<ITargetAddressValidator>(),
-                       new MessageSender<TContent>(sp.GetService<IEnumerable<ITargetTypeCase<TContent>>>(),
+                       new MessageSender<TContent>(sp.GetService<IEnumerable<IOutputGenerator<TContent>>>(),
                                                                        sp.GetService<IOutput<TContent>>(), null))));
             }
             );

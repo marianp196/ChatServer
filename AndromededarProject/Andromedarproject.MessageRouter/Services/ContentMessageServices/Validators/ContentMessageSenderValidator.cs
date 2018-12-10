@@ -4,9 +4,9 @@ using System;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators
 {
-    public class ContentRouterInputSenderValidator<TContent> : BasicRouter<TContent>
+    public class ContentMessageSenderValidator<TContent> : BasicRouter<TContent>
     {
-        public ContentRouterInputSenderValidator(ISenderAddressValidator senderAdressValidator, IContentRouter<TContent> next) : base(next)
+        public ContentMessageSenderValidator(ISenderAddressValidator senderAdressValidator, IContentRouter<TContent> next) : base(next)
         {
             _senderAdressValidator = senderAdressValidator ?? throw new ArgumentNullException(nameof(senderAdressValidator));
         }

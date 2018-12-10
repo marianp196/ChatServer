@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
 {
-    public interface ITargetTypeCase<TContent>
+    public interface IOutputGenerator<TContent>
     {
-        bool IsResponsible(EAdressType messageType);
+        bool IsResponsible(EAdressType targetAdressType);
         IEnumerable<BasicOutputMessage<TContent>> GetOutputs(Adress sender, Adress target, TContent content);
     }
 }
