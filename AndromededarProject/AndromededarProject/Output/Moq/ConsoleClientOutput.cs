@@ -1,5 +1,6 @@
 ﻿using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Output.Abstractions;
+using AndromededarProject.Web.ClientInputHubs;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,15 @@ namespace AndromededarProject.Web.Output.Moq
 {
     public class ConsoleClientOutput<TContent> : IClientOutput<TContent>
     {
-        public ConsoleClientOutput(IHubCallerClients clients)
+        public ConsoleClientOutput()
         {
-            _clients = clients;
+            
         }
 
         public async Task Send(BasicOutputMessage<TContent> message)
         {
-            Console.WriteLine("Client: " + message.Target.Name);
+            Console.WriteLine(message.Content);
         }
-
-        private IHubCallerClients _clients;       
+      
     }
 }
