@@ -1,4 +1,5 @@
 ﻿using Andromedarproject.MessageDto.Contents;
+using Andromedarproject.MessageDto.Input;
 using Andromedarproject.MessageRouter.Services.ContentRouters;
 using Andromedarproject.Users.Abstractions;
 using Microsoft.AspNetCore.SignalR;
@@ -14,7 +15,7 @@ namespace AndromededarProject.Web.ClientInputHubs
            // _router = provider.
         }
 
-        public async Task SendTextMessage(string user, /*BasicInputMessage<TextContent>*/ string message)
+        public async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
         {
             //_router.Rout(message.Sender, message.Target, message.Content);
             Console.WriteLine(message);

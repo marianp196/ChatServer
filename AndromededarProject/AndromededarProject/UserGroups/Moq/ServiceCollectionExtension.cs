@@ -13,8 +13,8 @@ namespace AndromededarProject.Web.UserGroups.Moq
     {
         public static IServiceCollection TryAddUserGroupMoq(this IServiceCollection sc)
         {
-            sc.TryAddSingleton<IUserReader, UserServiceMoq>();
-            sc.TryAddSingleton<IGroupReader, GroupServiceMoq>();
+            sc.TryAddSingleton<IUserReader, UserGroupServiceMoq>();
+            sc.TryAddSingleton<IGroupReader, UserGroupServiceMoq>();
             return sc;
         }
     }

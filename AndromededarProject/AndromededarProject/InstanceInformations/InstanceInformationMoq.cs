@@ -10,7 +10,7 @@ namespace AndromededarProject.Web.InstanceInformations
     {
         public string Name()
         {
-            return "Marian";
+            return "MyHome";
         }
     }
 }

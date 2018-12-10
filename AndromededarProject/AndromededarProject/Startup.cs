@@ -54,7 +54,7 @@ namespace AndromededarProject
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseSignalR(routes =>
             {
