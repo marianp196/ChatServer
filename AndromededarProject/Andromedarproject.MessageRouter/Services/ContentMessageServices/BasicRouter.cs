@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Andromedarproject.MessageDto.Adresses;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
 {
     public abstract class BasicRouter<TContent> : IContentRouter<TContent>
     {

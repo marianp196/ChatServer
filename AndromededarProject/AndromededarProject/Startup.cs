@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Contents;
+using Andromedarproject.MessageRouter.Output;
 using Andromedarproject.MessageRouter.Services;
 using AndromededarProject.Web.ClientInputHubs;
 using AndromededarProject.Web.InstanceInformations;
@@ -36,6 +37,7 @@ namespace AndromededarProject
             services.TryAddUserGroupMoq();
 
             services.TryAddInstanceInformation().
+                TryAddRouterOutput<TextContent>().
                 TryAddOutputMoq<TextContent>().
                 TryAddServices<TextContent>();
 
@@ -54,7 +56,7 @@ namespace AndromededarProject
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseSignalR(routes =>
             {

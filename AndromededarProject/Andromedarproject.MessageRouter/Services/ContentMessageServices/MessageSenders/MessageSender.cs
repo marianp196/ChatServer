@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
-using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.TargetTypeCases;
+using Andromedarproject.MessageRouter.Output.Abstractions;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders
 {
-    public class ContentRouterTargetTypeCaseSwitch<TContent> : BasicRouter<TContent>
+    public class MessageSender<TContent> : BasicRouter<TContent>
     {      
 
-        public ContentRouterTargetTypeCaseSwitch(IEnumerable<ITargetTypeCase<TContent>> messageTypeCases,
+        public MessageSender(IEnumerable<ITargetTypeCase<TContent>> messageTypeCases,
                                                 IOutput<TContent> output,
                                                 IContentRouter<TContent> next) : base(next)
         {

@@ -1,11 +1,11 @@
 ﻿using System;
 using Andromedarproject.MessageDto.Adresses;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters.Validators
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators
 {
-    public class ContentRouterInputValidator<TContent> : BasicRouter<TContent>
+    public class ContentMessageInputValidator<TContent> : BasicRouter<TContent>
     {
-        public ContentRouterInputValidator(IContentRouter<TContent> next) : base(next)
+        public ContentMessageInputValidator(IContentRouter<TContent> next) : base(next)
         {
         }
 

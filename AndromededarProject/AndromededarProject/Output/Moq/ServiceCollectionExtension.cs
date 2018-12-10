@@ -1,4 +1,4 @@
-﻿using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
+﻿using Andromedarproject.MessageRouter.Output.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -12,6 +12,7 @@ namespace AndromededarProject.Web.Output.Moq
     {
         public static IServiceCollection TryAddOutputMoq<TContent>(this IServiceCollection sc)
         {
+
             sc.TryAddSingleton<IServerOutput<TContent>, ConsoleServerOutput<TContent>>();
             sc.TryAddSingleton<IClientOutput<TContent>, ConsoleClientOutput<TContent>>();
             return sc;

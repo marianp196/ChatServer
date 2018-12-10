@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.MessageInputOutputConverter;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.TargetTypeCases
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases
 {
     public class UserTypeCase<TContent> : TragetTypeCase<TContent>
     {

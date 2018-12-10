@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
 {
     public interface IContentRouter<TContent>
     {

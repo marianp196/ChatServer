@@ -1,5 +1,5 @@
 ﻿using Andromedarproject.MessageRouter.Services.AdressValidator;
-using Andromedarproject.MessageRouter.Services.ContentRouters;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Andromedarproject.MessageRouter.Services

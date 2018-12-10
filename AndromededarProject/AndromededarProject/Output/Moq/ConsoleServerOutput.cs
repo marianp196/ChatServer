@@ -1,5 +1,5 @@
 ﻿using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
+using Andromedarproject.MessageRouter.Output.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

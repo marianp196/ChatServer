@@ -2,7 +2,7 @@
 using Andromedarproject.MessageRouter.Services.AdressValidator;
 using System;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters.Validators
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators
 {
     public class ContentRouterInputSenderValidator<TContent> : BasicRouter<TContent>
     {

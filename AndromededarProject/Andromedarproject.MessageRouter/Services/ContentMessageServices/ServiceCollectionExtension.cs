@@ -1,16 +1,16 @@
-﻿using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
+﻿using Andromedarproject.MessageRouter.Output.Abstractions;
 using Andromedarproject.MessageRouter.Services.AdressValidator;
-using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches;
-using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.MessageInputOutputConverter;
-using Andromedarproject.MessageRouter.Services.ContentRouters.TargetTypeCaseSwitches.TargetTypeCases;
-using Andromedarproject.MessageRouter.Services.ContentRouters.Validators;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.TargetTypeCases;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentRouters
+namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
 {
     public static class ServiceCollectionExtension
     {
@@ -20,10 +20,10 @@ namespace Andromedarproject.MessageRouter.Services.ContentRouters
 
             serviceCollection.TryAddTransient<IContentRouter<TContent>>( sp =>
             {
-                return new ContentRouterInputValidator<TContent>(
-                       new ContentRouterInputSenderValidator<TContent>(sp.GetService<ISenderAddressValidator>(),
+                return new ContentMessageInputValidator<TContent>(
+                       new ContentMessageSenderValidator<TContent>(sp.GetService<ISenderAddressValidator>(),
                        new ContentRouterInputTargetValidator<TContent>(sp.GetService<ITargetAddressValidator>(),
-                       new ContentRouterTargetTypeCaseSwitch<TContent>(sp.GetService<IEnumerable<ITargetTypeCase<TContent>>>(),
+                       new MessageSender<TContent>(sp.GetService<IEnumerable<ITargetTypeCase<TContent>>>(),
                                                                        sp.GetService<IOutput<TContent>>(), null))));
             }
             );

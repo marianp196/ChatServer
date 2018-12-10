@@ -1,11 +1,11 @@
 ﻿using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.RouterOutput.Abstractions;
+using Andromedarproject.MessageRouter.Output.Abstractions;
 using Andromedarproject.MessageRouter.Settings;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.RouterOutput
+namespace Andromedarproject.MessageRouter.Output
 {
     public class OutputSwitch<TContent> : IOutput<TContent>
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.RouterOutput.Abstractions
+namespace Andromedarproject.MessageRouter.Output.Abstractions
 {
     public interface IOutput<TContent>
     {
