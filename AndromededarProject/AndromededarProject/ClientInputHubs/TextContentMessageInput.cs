@@ -17,7 +17,7 @@ namespace AndromededarProject.Web.ClientInputHubs
 
         public async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
         {
-            _router.Rout(message.Sender, message.Target, message.Content);
+            await _router.Rout(message.Sender, message.Target, message.Content);
         }
 
 

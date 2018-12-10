@@ -1,6 +1,7 @@
 ﻿using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Services.AdressValidator;
 using System;
+using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators
 {
@@ -11,10 +12,10 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
             _senderAdressValidator = senderAdressValidator ?? throw new ArgumentNullException(nameof(senderAdressValidator));
         }
 
-        public override void Rout(Adress sender, Adress target, TContent content)
+        public override async Task Rout(Adress sender, Adress target, TContent content)
         {
             _senderAdressValidator.Validate(sender);
-            base.Next(sender, target, content);
+            await base.Next(sender, target, content);
         }
 
         private readonly ISenderAddressValidator _senderAdressValidator;

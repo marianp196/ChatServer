@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Output.Abstractions
 {
     public interface IOutput<TContent>
     {
-        void Send(BasicOutputMessage<TContent> message);
+        Task Send(BasicOutputMessage<TContent> message);
     }
 
     public interface IServerOutput<TContent> : IOutput<TContent>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Validators
@@ -9,7 +10,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
         {
         }
 
-        public override void Rout(Adress sender, Adress target, TContent content)
+        public override async Task Rout(Adress sender, Adress target, TContent content)
         {
             if (sender == null)
                 throw new ArgumentNullException(nameof(target));
@@ -18,7 +19,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
             if (content == null)
                 throw new ArgumentNullException(nameof(target));
 
-            base.Next(sender, target, content);
+            await base.Next(sender, target, content);
         }
     }
 }

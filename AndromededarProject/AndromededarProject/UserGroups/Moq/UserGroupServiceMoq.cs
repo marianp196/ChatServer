@@ -15,6 +15,7 @@ namespace AndromededarProject.Web.UserGroups.Moq
             group.Name = "group";
             var usrs = new List<User>();
             group.Users = usrs;
+            _group = group;
             
 
             var user = new User();

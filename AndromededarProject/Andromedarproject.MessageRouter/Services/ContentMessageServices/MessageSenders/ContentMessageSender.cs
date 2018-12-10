@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Output.Abstractions;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders
 {
-    public class MessageSender<TContent> : BasicRouter<TContent>
+    public class ContentMessageSender<TContent> : BasicRouter<TContent>
     {      
 
-        public MessageSender(IEnumerable<IOutputGenerator<TContent>> messageTypeCases,
+        public ContentMessageSender(IEnumerable<IOutputGenerator<TContent>> messageTypeCases,
                                                 IOutput<TContent> output,
                                                 IContentRouter<TContent> next) : base(next)
         {
@@ -17,7 +18,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             _output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
-        public override void Rout(Adress sender, Adress target, TContent content)
+        public override async Task Rout(Adress sender, Adress target, TContent content)
         {
             IOutputGenerator<TContent> messageTypeCase = getCase(target.AdressType);
             if (messageTypeCase == null)
@@ -26,9 +27,9 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             var outputMessages = messageTypeCase.GetOutputs(sender, target, content);
 
             foreach (var outputMessage in outputMessages)
-                _output.Send(outputMessage);
+               await _output.Send(outputMessage);
 
-            Next(sender, target, content);
+            await Next(sender, target, content);
         }
 
         private IOutputGenerator<TContent> getCase(EAdressType adressType)

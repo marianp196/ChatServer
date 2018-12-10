@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
@@ -12,12 +13,12 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
             _next = next;
         }
 
-        public abstract void Rout(Adress sender, Adress target, TContent content);
+        public abstract Task Rout(Adress sender, Adress target, TContent content);
 
-        protected void Next(Adress sender, Adress target, TContent content)
+        protected async Task Next(Adress sender, Adress target, TContent content)
         {
             if (_next != null)
-                _next.Rout(sender, target, content);
+                await _next.Rout(sender, target, content);
         }
 
         private readonly IContentRouter<TContent> _next;

@@ -10,7 +10,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddTargetTypeCases<TContent>(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddOutputGenerators<TContent>(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<IOutputGenerator<TContent>, UserOutputGenerator<TContent>>();
             serviceCollection.AddTransient<IOutputGenerator<TContent>, GroupOutputGenerator<TContent>>();

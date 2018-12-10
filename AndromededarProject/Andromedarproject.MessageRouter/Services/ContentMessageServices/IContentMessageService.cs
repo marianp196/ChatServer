@@ -3,11 +3,12 @@ using Andromedarproject.MessageDto.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
 {
     public interface IContentRouter<TContent>
     {
-        void Rout(Adress sender, Adress target, TContent content);
+        Task Rout(Adress sender, Adress target, TContent content);
     }
 }

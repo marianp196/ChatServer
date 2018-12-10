@@ -4,6 +4,7 @@ using Andromedarproject.MessageRouter.Settings;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Output
 {
@@ -16,7 +17,7 @@ namespace Andromedarproject.MessageRouter.Output
             _information = information ?? throw new ArgumentNullException(nameof(information));
         }
 
-        public void Send(BasicOutputMessage<TContent> message)
+        public async Task Send(BasicOutputMessage<TContent> message)
         {
             if (message.Target.IsOnHomeServerByProtocoll(_information.Name()))
                 _clinetOutput.Send(message);
