@@ -12,9 +12,7 @@ namespace AndromededarProject.Web.Output.Moq
     public class ConsoleClientOutput<TContent> : IClientOutput<TContent>
     {
         public ConsoleClientOutput()
-        {
-            
-        }
+        {}
 
         public async Task Send(BasicOutputMessage<TContent> message)
         {

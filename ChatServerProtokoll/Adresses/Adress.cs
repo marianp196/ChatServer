@@ -38,5 +38,10 @@ namespace Andromedarproject.MessageDto.Adresses
                    Name == adress.Name &&
                    Server == adress.Server;
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(AdressType, Name, Server);
+        }
     }
 }

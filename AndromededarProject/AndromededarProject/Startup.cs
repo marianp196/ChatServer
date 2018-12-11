@@ -6,8 +6,10 @@ using Andromedarproject.MessageDto.Contents;
 using Andromedarproject.MessageRouter.Output;
 using Andromedarproject.MessageRouter.Services;
 using AndromededarProject.Web.ClientInputHubs;
+using AndromededarProject.Web.ConnectionPool;
 using AndromededarProject.Web.InstanceInformations;
 using AndromededarProject.Web.Output.Moq;
+using AndromededarProject.Web.Output.ServerClients;
 using AndromededarProject.Web.UserGroups.Moq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,11 +36,12 @@ namespace AndromededarProject
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.TryAddConnectionPool();
             services.TryAddUserGroupMoq();
 
             services.TryAddInstanceInformation().
                 TryAddRouterOutput<TextContent>().
-                TryAddOutputMoq<TextContent>().
+                TryAddClientOutput<TextContent>().
                 TryAddServices<TextContent>();
 
             services.AddSignalR();
@@ -60,7 +63,7 @@ namespace AndromededarProject
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<TextContentMessageInput>("/TextMessageInput");
+                routes.MapHub<ChatHub>("/ChatHub");
             });
 
             app.UseMvc();
