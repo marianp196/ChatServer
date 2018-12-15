@@ -32,8 +32,7 @@ namespace AndromededarProject.Web.ClientInputHubs
             if (!_connectionPool.TryGetValue(message.Sender, out var obj))
                 return;
 
-            await _router.Rout(message.Sender, message.Target, message.Content);            
-            //await Clients.Client(Context.ConnectionId).SendAsync("ReceiveTextMessage", new BasicOutputMessage<TextContent>());
+            await _router.Rout(new UserDto {Name = "User" }, new Message<TextContent>());
         }
 
 

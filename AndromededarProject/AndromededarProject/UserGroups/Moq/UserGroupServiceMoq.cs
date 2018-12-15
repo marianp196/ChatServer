@@ -43,14 +43,6 @@ namespace AndromededarProject.Web.UserGroups.Moq
             return true;
         }
 
-        public async Task<Result<User>> GetUser(string name)
-        {
-            var result = new Result<User>();
-            result.Value = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
-            result.Success = result.Value != null;
-            return result;
-        }
-
         public async  Task<Result<Group>> GetGroup(string name)
         {
             var result = new Result<Group>();
@@ -58,6 +50,22 @@ namespace AndromededarProject.Web.UserGroups.Moq
                 return result; ;
             result.Success = true;
             result.Value = _group;
+            return result;
+        }
+
+        public async Task<Result<User>> GetUserByAdressname(string name)
+        {
+            var result = new Result<User>();
+            result.Value = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
+            result.Success = result.Value != null;
+            return result;
+        }
+
+        public async  Task<Result<User>> GetUserByUserName(string name)
+        {
+            var result = new Result<User>();
+            result.Value = _users.Where(kvp => kvp.Value.Name == name).Select(x => x.Value).FirstOrDefault();
+            result.Success = result.Value != null;
             return result;
         }
 

@@ -20,7 +20,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
             if (result.IsViolated())
                 throw result.CreateNotValidException();
             else
-                Next(user, message);
+                await Next(user, message);
         }
 
         private readonly IValidatorService<Message<TContent>> _validatorService;

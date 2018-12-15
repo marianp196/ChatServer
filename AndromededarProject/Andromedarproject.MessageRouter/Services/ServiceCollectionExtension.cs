@@ -1,5 +1,4 @@
-﻿using Andromedarproject.MessageRouter.Services.AdressValidator;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices;
+﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Andromedarproject.MessageRouter.Services
@@ -8,7 +7,7 @@ namespace Andromedarproject.MessageRouter.Services
     {
         public static IServiceCollection TryAddServices<TContent>(this IServiceCollection serviceCollection)
         {
-            serviceCollection.TryAddAdressValidation().TryAddContentRouter<TContent>();
+            serviceCollection.TryAddContentRouter<TContent>();
             return serviceCollection;
         }
     }

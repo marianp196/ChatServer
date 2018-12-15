@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 
-namespace Andromedarproject.MessageRouter.Services.Shared.OutputServices
+namespace Andromedarproject.MessageRouter.Services.OutputServices
 {
     public class OutputSwitchService<TContent> : IOutputService<TContent>
     {

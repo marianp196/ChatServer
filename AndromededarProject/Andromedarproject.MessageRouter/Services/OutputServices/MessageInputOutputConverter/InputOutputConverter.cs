@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.Shared.OutputServices.MessageInputOutputConverter
+namespace Andromedarproject.MessageRouter.Services.OutputServices.MessageInputOutputConverter
 {
     public class InputOutputConverter<TContent> : IInputOutputConverter<TContent>
     {

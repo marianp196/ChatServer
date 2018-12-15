@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.Shared.OutputServices
+namespace Andromedarproject.MessageRouter.Services.OutputServices
 {
     public interface IOutputService<TContent>
     {

@@ -7,7 +7,7 @@ namespace Andromedarproject.Users.Abstractions
     public class User
     {
         public Guid ID {get; set;}
-        //username einsetzen
+        public string Name { get; set; }
         public Adress  Adress{ get; set; }
         public string Password { get; set; }
     }
