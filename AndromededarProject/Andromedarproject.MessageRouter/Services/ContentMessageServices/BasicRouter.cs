@@ -12,14 +12,15 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
         {
             _next = next;
         }
+       
 
-        public abstract Task Rout(Adress sender, Adress target, TContent content);
-
-        protected async Task Next(Adress sender, Adress target, TContent content)
+        protected async Task Next(UserDto user, Message<TContent> message)
         {
             if (_next != null)
-                await _next.Rout(sender, target, content);
+                await _next.Rout(user, message);
         }
+
+        public abstract Task Rout(UserDto user, Message<TContent> message);
 
         private readonly IContentRouter<TContent> _next;
     }

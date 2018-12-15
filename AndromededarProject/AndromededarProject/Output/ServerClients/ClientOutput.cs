@@ -19,12 +19,13 @@ namespace AndromededarProject.Web.Output.ServerClients
             _connectionPool = connectionPool;
         }
 
-        public async Task Send(BasicOutputMessage<TContent> message)
+        public async Task<bool> Send(BasicOutputMessage<TContent> message)
         {
             if (!_connectionPool.TryGetValue(message.Target, out var connectionId))
-                return;
+                return false;
 
             await _context.Clients.Client(connectionId).SendAsync("ReceiveTextMessage", message);
+            return true;
         }
         private IHubContext<ChatHub> _context;
         private readonly IConnectionPool _connectionPool;

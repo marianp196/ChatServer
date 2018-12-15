@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
+using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Output.Abstractions;
+using Andromedarproject.MessageRouter.OutputCache;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders
@@ -18,7 +20,13 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             _output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
-        public override async Task Rout(Adress sender, Adress target, TContent content)
+        public override async Task Rout(UserDto user, Message<TContent> message)
+        {
+            await Rout(message.Sender, message.Traget, message.Content);
+            await Next(user, message);
+        }
+
+        private async Task Rout(Adress sender, Adress target, TContent content)
         {
             IOutputGenerator<TContent> messageTypeCase = getCase(target.AdressType);
             if (messageTypeCase == null)
@@ -27,9 +35,13 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             var outputMessages = await messageTypeCase.GetOutputs(sender, target, content);
 
             foreach (var outputMessage in outputMessages)
-                await _output.Send(outputMessage);
+                await SendMessage(outputMessage);
+            
+        }
 
-            await Next(sender, target, content);
+        private async Task SendMessage(BasicOutputMessage<TContent> outputMessage)
+        {
+            await _output.Send(outputMessage);           
         }
 
         private IOutputGenerator<TContent> getCase(EAdressType adressType)
@@ -38,7 +50,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
                 if (messageCase.IsResponsible(adressType))
                     return messageCase;
             return null;
-        }
+        }        
 
         private readonly IEnumerable<IOutputGenerator<TContent>> _messageTypeCases;
         private readonly IOutput<TContent> _output;

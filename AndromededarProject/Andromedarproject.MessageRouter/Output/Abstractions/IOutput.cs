@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Output.Abstractions
 {
+
+
     public interface IOutput<TContent>
     {
-        Task Send(BasicOutputMessage<TContent> message);
+        Task<bool> Send(BasicOutputMessage<TContent> message);
     }
 
     public interface IServerOutput<TContent> : IOutput<TContent>
     {}
 
     public interface IClientOutput<TContent> : IOutput<TContent>
-    {}
+    {}    
 }

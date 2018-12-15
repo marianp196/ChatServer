@@ -17,12 +17,12 @@ namespace Andromedarproject.MessageRouter.Output
             _information = information ?? throw new ArgumentNullException(nameof(information));
         }
 
-        public async Task Send(BasicOutputMessage<TContent> message)
+        public async Task<bool> Send(BasicOutputMessage<TContent> message)
         {
             if (message.Target.IsOnHomeServerByProtocoll(_information.Name()))
-                _clinetOutput.Send(message);
+                return await _clinetOutput.Send(message);
             else
-                _serverOutput.Send(message);
+                return await _serverOutput.Send(message);
         }
 
         private readonly IServerOutput<TContent> _serverOutput;

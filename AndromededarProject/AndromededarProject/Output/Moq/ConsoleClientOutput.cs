@@ -14,9 +14,10 @@ namespace AndromededarProject.Web.Output.Moq
         public ConsoleClientOutput()
         {}
 
-        public async Task Send(BasicOutputMessage<TContent> message)
+        public async Task<bool> Send(BasicOutputMessage<TContent> message)
         {
             Console.WriteLine(message.Content);
+            return true;
         }
       
     }

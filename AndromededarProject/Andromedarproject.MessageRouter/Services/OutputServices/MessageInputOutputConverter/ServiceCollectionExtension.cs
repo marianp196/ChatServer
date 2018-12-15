@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.MessageInputOutputConverter
+namespace Andromedarproject.MessageRouter.Services.OutputServices.MessageInputOutputConverter
 {
     public static class ServiceCollectionExtension
     {
