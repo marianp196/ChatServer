@@ -11,7 +11,7 @@ namespace AndromededarProject.Web.Output.ServerClients
         {
 
             sc.TryAddSingleton<IServerOutput<TContent>, ConsoleServerOutput<TContent>>();
-            sc.TryAddSingleton<IClientOutput<TContent>, ClientOutput<TContent>>();
+            sc.TryAddSingleton<IClientOutput<TContent>, ConsoleClientOutput<TContent>>();
             return sc;
         }
     }

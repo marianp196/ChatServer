@@ -9,9 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.Validators
-{
+{   
     public class TargetAdressValidator<TContent> : IValidator<Message<TContent>>
     {
+        public TargetAdressValidator(IUserReader userReader, IGroupReader groupReader, IInstanceInformation instanceInforrmation)
+        {
+            _userReader = userReader ?? throw new ArgumentNullException(nameof(userReader));
+            _groupReader = groupReader ?? throw new ArgumentNullException(nameof(groupReader));
+            _instanceInforrmation = instanceInforrmation ?? throw new ArgumentNullException(nameof(instanceInforrmation));
+        }
+
         public async  Task<IEnumerable<Violation>> Validate(Message<TContent> obj)
         {
             var result = new List<Violation>();
@@ -66,5 +73,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
         private readonly IUserReader _userReader;
         private readonly IGroupReader _groupReader;
         private readonly IInstanceInformation _instanceInforrmation;
+
+       
     }
 }

@@ -16,6 +16,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Valida
         {
             ValidationResult result = new ValidationResult();
             List<Violation> violationList = new List<Violation>();
+            result.Violations = violationList;
 
             foreach (var validator in _validators)
                 violationList.AddRange(await validator.Validate(obj));
