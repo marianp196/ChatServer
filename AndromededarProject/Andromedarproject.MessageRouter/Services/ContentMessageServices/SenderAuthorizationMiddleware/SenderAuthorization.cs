@@ -16,6 +16,8 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Sender
 
         public override async Task Rout(UserDto user, Message<TContent> message)
         {
+
+            //ToDo hier violation zurückgeben
             var result = await _userReader.GetUserByUserName(user.Name);
             if (!result.Success)
                 throw new NotValidException("Not authorized");  

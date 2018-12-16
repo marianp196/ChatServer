@@ -34,6 +34,8 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
 
             var outputMessages = await messageTypeCase.GetOutputs(sender, target, content);
 
+            //ToDo SenderUser heruasfiltern
+
             foreach (var outputMessage in outputMessages)
                 await SendMessage(outputMessage);
             
