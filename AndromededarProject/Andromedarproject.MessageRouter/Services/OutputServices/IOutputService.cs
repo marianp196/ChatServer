@@ -1,17 +1,14 @@
-﻿using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageDto.Output;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Andromedarproject.MessageRouter.Output;
 using System.Threading.Tasks;
 
 namespace Andromedarproject.MessageRouter.Services.OutputServices
 {
     public interface IOutputService<TContent>
     {
-        Task<EResult> Send(Adress Sender, Adress TargetUser, Adress TargetGroup, TContent content);
-        Task<EResult> Send(Adress Sender, Adress TargetUser, TContent content);
+        Task<EResult> Send(OutputDto<TContent> message);
+
     }
+
     
     public enum EResult
     {

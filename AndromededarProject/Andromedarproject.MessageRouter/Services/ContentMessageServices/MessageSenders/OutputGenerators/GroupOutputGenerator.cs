@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Services.OutputServices.MessageInputOutputConverter;
+using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.MessageRouter.Services.OutputServices;
+using Andromedarproject.MessageRouter.utils;
 using Andromedarproject.Users.Abstractions.Groups;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
@@ -11,13 +13,20 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
     public class GroupOutputGenerator<TContent> : OutputGenerator<TContent>
     {       
 
-        public GroupOutputGenerator(IInputOutputConverter<TContent> converter, IGroupReader groupReader) : base(converter)
+        public GroupOutputGenerator(IGroupReader groupReader)
         {
             _groupReader = groupReader ?? throw new ArgumentNullException(nameof(groupReader));
         }
 
-        public override async Task<IEnumerable<BasicOutputMessage<TContent>>> GetOutputs(Adress sender, Adress target, TContent content)
+        public override bool IsResponsible(EAdressType messageType)
         {
+            return messageType == EAdressType.Group;
+        }
+
+        public override async Task<IEnumerable<OutputDto<TContent>>> GetOutputs(Message<TContent> input)
+        {
+            var target = input.Traget;
+
             if (!IsResponsible(target.AdressType))
                 throw new Exception("Not responsible");
 
@@ -26,19 +35,25 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
                 throw new Exception("Cant find group");
 
             var group = groupResult.Value;
-            var resultList = new List<BasicOutputMessage<TContent>>();
-            foreach (var user in group.Users)
-                resultList.Add(Convert(sender, user.Adress, target, content));
+            List<OutputDto<TContent>> resultList = generateOutput(input, group);
 
             return resultList;
-                
         }
 
-        public override bool IsResponsible(EAdressType messageType)
+        private List<OutputDto<TContent>> generateOutput(Message<TContent> input, Group group)
         {
-            return messageType == EAdressType.Group;
-        }
+            var resultList = new List<OutputDto<TContent>>();
+            foreach (var user in group.Users)
+            {
+                var output = Convert(input);
+                output.SenderType = ESenderType.Group;
+                output.UserSender = input.Sender;
+                output.GroupSender = input.Traget;
+                resultList.Add(output.DeepCopy());
+            }
 
+            return resultList;
+        }
         private readonly IGroupReader _groupReader;
     }
 }

@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Services.OutputServices.MessageInputOutputConverter;
+using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.MessageRouter.Services.OutputServices;
+using Andromedarproject.MessageRouter.utils;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
 {
     public class UserOutputGenerator<TContent> : OutputGenerator<TContent>
     {
-        public UserOutputGenerator(IInputOutputConverter<TContent> converter) : base(converter)
-        {
-        }
 
-        public override async Task<IEnumerable<BasicOutputMessage<TContent>>> GetOutputs(Adress sender, Adress target, TContent content)
+        public override async Task<IEnumerable<OutputDto<TContent>>> GetOutputs(Message<TContent> input)
         {
-            if (!IsResponsible(target.AdressType))
+            if (!IsResponsible(input.Traget.AdressType))
                 throw new Exception("Not Rootable for this case");
 
-            return new List<BasicOutputMessage<TContent>>() { Convert(sender, target, null, content) };
+            var output = Convert(input);
+            output.SenderType = ESenderType.User;
+            output.Traget = input.Traget;
+            return new List<OutputDto<TContent>>() { output.DeepCopy() };
         }
 
         public override bool IsResponsible(EAdressType messageType)

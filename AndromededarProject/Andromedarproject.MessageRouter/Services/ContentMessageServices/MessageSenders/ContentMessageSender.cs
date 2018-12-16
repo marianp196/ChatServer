@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Output.Abstractions;
-using Andromedarproject.MessageRouter.OutputCache;
+using Andromedarproject.MessageRouter.Output;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
+using Andromedarproject.MessageRouter.Services.OutputServices;
 
 namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders
 {
@@ -13,7 +12,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
     {
 
         public ContentMessageSender(IEnumerable<IOutputGenerator<TContent>> messageTypeCases,
-                                                IOutput<TContent> output,
+                                                OutputServices.IOutputService<TContent> output,
                                                 IContentRouter<TContent> next) : base(next)
         {
             _messageTypeCases = messageTypeCases ?? throw new ArgumentNullException(nameof(messageTypeCases));
@@ -22,17 +21,17 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
 
         public override async Task Rout(UserDto user, Message<TContent> message)
         {
-            await Rout(message.Sender, message.Traget, message.Content);
+            await Rout(message);
             await Next(user, message);
         }
 
-        private async Task Rout(Adress sender, Adress target, TContent content)
+        private async Task Rout(Message<TContent> message)
         {
-            IOutputGenerator<TContent> messageTypeCase = getCase(target.AdressType);
+            IOutputGenerator<TContent> messageTypeCase = getCase(message.Traget.AdressType);
             if (messageTypeCase == null)
                 throw new Exception("Address Type not Known. Can't be routed");
 
-            var outputMessages = await messageTypeCase.GetOutputs(sender, target, content);
+            var outputMessages = await messageTypeCase.GetOutputs(message);
 
             //ToDo SenderUser heruasfiltern
 
@@ -41,7 +40,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
             
         }
 
-        private async Task SendMessage(BasicOutputMessage<TContent> outputMessage)
+        private async Task SendMessage(OutputDto<TContent> outputMessage)
         {
             await _output.Send(outputMessage);           
         }
@@ -55,7 +54,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
         }        
 
         private readonly IEnumerable<IOutputGenerator<TContent>> _messageTypeCases;
-        private readonly IOutput<TContent> _output;
+        private readonly OutputServices.IOutputService<TContent> _output;
     }
 }
 

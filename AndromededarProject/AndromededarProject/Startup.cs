@@ -40,8 +40,7 @@ namespace AndromededarProject
             services.TryAddUserGroupMoq();
 
             services.TryAddInstanceInformation().
-                TryAddRouterOutput<TextContent>().
-                TryAddClientOutput<TextContent>().
+                TryAddClientOutputMoq<TextContent>().
                 TryAddServices<TextContent>();
 
             services.AddSignalR();
