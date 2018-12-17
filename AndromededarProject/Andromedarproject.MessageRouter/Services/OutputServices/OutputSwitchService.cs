@@ -19,7 +19,7 @@ namespace Andromedarproject.MessageRouter.Services.OutputServices
         public async Task<EResult> Send(OutputDto<TContent> message)
         {
             bool result = await send(message);
-            return result ? EResult.Success : EResult.Error;
+            return result ? EResult.Success : EResult.CantBeSended;
         }
 
         private async Task<bool> send(OutputDto<TContent> message)

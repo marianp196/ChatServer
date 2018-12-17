@@ -13,7 +13,7 @@ namespace AndromededarProject.Web.Output.Moq
         public async Task<bool> Send(OutputDto<TContent> message)
         {
             Console.WriteLine(message.Content);
-            return true;
+            return false;
         }
     }
 }

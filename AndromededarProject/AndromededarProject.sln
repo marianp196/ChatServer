@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andromedarproject.MessageRo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andromedarproject.Users.Abstractions", "Andromedarproject.Users.Abstractions\Andromedarproject.Users.Abstractions.csproj", "{EE8CF490-0C36-4033-B832-74CC3A5F7265}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Andromedarproject.Users.Database", "Andromedarproject.Users.Database\Andromedarproject.Users.Database.csproj", "{498FCC11-0745-4744-9B66-304B78CAA209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE8CF490-0C36-4033-B832-74CC3A5F7265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{498FCC11-0745-4744-9B66-304B78CAA209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498FCC11-0745-4744-9B66-304B78CAA209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498FCC11-0745-4744-9B66-304B78CAA209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498FCC11-0745-4744-9B66-304B78CAA209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

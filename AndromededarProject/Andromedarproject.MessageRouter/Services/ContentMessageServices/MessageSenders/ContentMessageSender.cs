@@ -12,7 +12,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
     {
 
         public ContentMessageSender(IEnumerable<IOutputGenerator<TContent>> messageTypeCases,
-                                                OutputServices.IOutputService<TContent> output,
+                                                IOutputService<TContent> output,
                                                 IContentRouter<TContent> next) : base(next)
         {
             _messageTypeCases = messageTypeCases ?? throw new ArgumentNullException(nameof(messageTypeCases));
@@ -33,8 +33,6 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
 
             var outputMessages = await messageTypeCase.GetOutputs(message);
 
-            //ToDo SenderUser heruasfiltern
-
             foreach (var outputMessage in outputMessages)
                 await SendMessage(outputMessage);
             
@@ -42,7 +40,9 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
 
         private async Task SendMessage(OutputDto<TContent> outputMessage)
         {
-            await _output.Send(outputMessage);           
+            var sendResult = await _output.Send(outputMessage);
+            if (sendResult == EResult.Error)
+                throw new SendErrorException("Can't be Routed");
         }
 
         private IOutputGenerator<TContent> getCase(EAdressType adressType)

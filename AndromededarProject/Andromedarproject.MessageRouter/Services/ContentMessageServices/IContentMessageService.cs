@@ -51,6 +51,13 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
         public IEnumerable<MessageViolation> MessageViolations { get; }
     }
 
+    public class SendErrorException : Exception
+    {
+        public SendErrorException(string message) : base(message)
+        {
+        }
+    }
+
     public class MessageViolation
     {
         public string Code { get; set; }

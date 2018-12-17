@@ -6,7 +6,6 @@ namespace Andromedarproject.MessageRouter.Services.OutputServices
     public interface IOutputService<TContent>
     {
         Task<EResult> Send(OutputDto<TContent> message);
-
     }
 
     
@@ -14,6 +13,7 @@ namespace Andromedarproject.MessageRouter.Services.OutputServices
     {
         Success = 0,
         Error = 1,
-        Cached = 2
+        CantBeSended = 2,
+        Cached = 3
     }
 }

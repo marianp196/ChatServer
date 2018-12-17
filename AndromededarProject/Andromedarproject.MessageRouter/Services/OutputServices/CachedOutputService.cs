@@ -1,17 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.MessageRouter.Services.OutputCache;
 
 namespace Andromedarproject.MessageRouter.Services.OutputServices
 {
     public class CachedOutputService<TContent> : IOutputService<TContent>
     {
-        public Task<EResult> Send(OutputDto<TContent> message)
+        public CachedOutputService(IOutputCache<TContent> cache, IOutputService<TContent> networkAccess)
         {
-            throw new NotImplementedException();
+            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
+            _networkAccess = networkAccess ?? throw new ArgumentNullException(nameof(networkAccess));
         }
+
+        public async Task<EResult> Send(OutputDto<TContent> message)
+        {
+            EResult result = await _networkAccess.Send(message);
+
+            if(result == EResult.CantBeSended)
+            {
+                await _cache.Push(message);
+                result = EResult.Cached;
+            }
+
+            return result;
+        }
+
+        private readonly IOutputCache<TContent> _cache;
+        private readonly IOutputService<TContent> _networkAccess;
     }
 }

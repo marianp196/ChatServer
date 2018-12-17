@@ -1,4 +1,5 @@
 ﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices;
+using Andromedarproject.MessageRouter.Services.OutputCache;
 using Andromedarproject.MessageRouter.Services.OutputServices;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,9 @@ namespace Andromedarproject.MessageRouter.Services
     {
         public static IServiceCollection TryAddServices<TContent>(this IServiceCollection serviceCollection)
         {
-            serviceCollection.TryAddOutputServcies<TContent>().TryAddContentRouter<TContent>();
+            serviceCollection.TryAddOutputServcies<TContent>().
+                TryAddOutputCache<TContent>().                            
+                TryAddContentRouter<TContent>();
             return serviceCollection;
         }
     }
