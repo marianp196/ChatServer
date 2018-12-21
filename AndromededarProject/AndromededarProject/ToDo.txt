@@ -1,0 +1,17 @@
+﻿Aufräumen- neue Projektstruktur
+Textmessages richtig anschließen
+Rückmeldung an Client über eingegangene Nachricht
+
+TypescriptClient bauen
+
+Users-Komponente bauen
+Logging bauen
+
+Subscribing
+Statusnachrichten
+Gelesennachrichten
+
+Authentifizierung
+
+Dokumentenversendung
+
