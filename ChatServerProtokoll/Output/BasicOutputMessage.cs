@@ -1,9 +1,12 @@
 ﻿using Andromedarproject.MessageDto.Adresses;
+using System;
 
 namespace Andromedarproject.MessageDto.Output
 {
     public class BasicOutputMessage<TContent>
     {
+        public Guid? ServerId { get; set; }
+
         public Adress Sender { get; set; }
         public Adress SenderGroup { get; set; }
         public Adress Target { get; set; } 
