@@ -19,65 +19,77 @@ namespace AndromededarProject.Web.ClientInputHubs
             _connectionPool = connectionPool;
         }
 
-        
-        public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
-        {
-            var messageDto = message.ConvertToMessage();
-            try
-            {
-                await _router.Rout(new UserDto { Name = "User" },  messageDto);
-            }
-            catch (NotValidException e)
-            {
-                if (e.MessageViolations == null)
-                {
-                    await sendResponse(new MessageResult
-                    {
-                        ClientID = message.Id,
-                        State = EState.Error,
-                        Errors = 
-                        new Error[] {new Error { Code = "unkn", Message = e.Message} }
-                        
-                    });
-                    return;
-                }
-
-                var errors = e.MessageViolations.Select(x => new Error { Code = x.Code, Message = x.Text });
-                await sendResponse(new MessageResult
-                {
-                    ClientID = message.Id,
-                    State = EState.Error,
-                    Errors = errors
-                });
-                return;
-            }
-            catch (Exception e)
-            {
-                await sendResponse(new MessageResult
-                {
-                    ClientID = message.Id,
-                    State = EState.Error,
-                    Errors =
-                        new Error[] { new Error { Code = "unkn", Message = e.Message } }
-
-                });
-                return;
-            }
-
-            
-        }
 
         public override async Task OnConnectedAsync()
         {
-            //Hier müsste dann noch das initialize ausgeführt werden.
             await base.OnConnectedAsync();
             _connectionPool.Add("User", Context.ConnectionId);
+            //Hier müsste dann noch das initialize ausgeführt werden. abholen liegengebliebener Nachrichten
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             await base.OnDisconnectedAsync(exception);
             _connectionPool.Remove("User");
+        }
+
+        public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
+        {
+            var messageDto = message.ConvertToMessage();
+            try
+            {
+                await _router.Rout(new UserDto { Name = "User" }, messageDto);
+            }
+            catch (NotValidException e)
+            {
+                if (e.MessageViolations == null)
+                {
+                    await unknownExceptionHandling(message, e);
+                    return;
+                }
+
+                await notValidExceptionHandling(message, e);
+                return;
+            }
+            catch (Exception e)
+            {
+                await unknownExceptionHandling(message, e);
+                return;
+            }
+
+            await successHandling(messageDto);
+        }
+
+        private async Task successHandling(Message<TextContent> messageDto)
+        {
+            await sendResponse(new MessageResult
+            {
+                ClientID = messageDto.ClientMessageId,
+                ServerID = messageDto.ServerId,
+                State = EState.Success
+            });
+        }
+
+        private async Task notValidExceptionHandling(BasicInputMessage<TextContent> message, NotValidException e)
+        {
+            var errors = e.MessageViolations.Select(x => new Error { Code = x.Code, Message = x.Text });
+            await sendResponse(new MessageResult
+            {
+                ClientID = message.Id,
+                State = EState.Error,
+                Errors = errors
+            });
+        }
+
+        private async Task unknownExceptionHandling(BasicInputMessage<TextContent> message, Exception e)
+        {
+            await sendResponse(new MessageResult
+            {
+                ClientID = message.Id,
+                State = EState.Error,
+                Errors = new Error[] { new Error { Code = "unknow", Message = e.Message } }
+
+            });
         }
 
         private async Task sendResponse(MessageResult obj)

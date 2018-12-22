@@ -55,7 +55,7 @@ namespace AndromededarProject
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ExceptionHandledChatHub>("/ChatHub");
+                routes.MapHub<ChatHub>("/ChatHub");
             });
 
             app.UseMvc();
