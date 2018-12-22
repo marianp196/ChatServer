@@ -2,27 +2,26 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
+using Andromedarproject.MessageRouter.ContentMessageServices.OutputGenerators;
 using Andromedarproject.MessageRouter.Output.OutputServices;
 using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage
+namespace Andromedarproject.MessageRouter.ContentMessageServices
 {
-    public class ContentMessageSender<TContent> : BasicRouter<TContent>
+    public class ContentMessageSender<TContent> : IBasicMessagePipeOutput<TContent>
     {
 
         public ContentMessageSender(IEnumerable<IOutputGenerator<TContent>> messageTypeCases,
-                                                IOutputService<TContent> output,
-                                                IContentRouter<TContent> next) : base(next)
+                                                IOutputService<TContent> output)
         {
             _messageTypeCases = messageTypeCases ?? throw new ArgumentNullException(nameof(messageTypeCases));
             _output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
-        public override async Task Rout(UserDto user, Message<TContent> message)
+        public async Task Rout(UserDto user, Message<TContent> message)
         {
             await Rout(message);
-            await Next(user, message);
         }
 
         private async Task Rout(Message<TContent> message)

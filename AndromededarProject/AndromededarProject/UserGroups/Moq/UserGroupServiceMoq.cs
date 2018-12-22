@@ -31,7 +31,7 @@ namespace AndromededarProject.Web.UserGroups.Moq
 
             user = new User();
             user.ID = Guid.NewGuid();
-            user.Name = "User";
+            user.Name = "User1";
             user.Password = "password";
             user.Adress = new Adress();
             user.Adress.Name = "adress2";
@@ -58,16 +58,18 @@ namespace AndromededarProject.Web.UserGroups.Moq
         public async Task<Result<User>> GetUserByAdressname(string name)
         {
             var result = new Result<User>();
-            result.Value = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
-            result.Success = result.Value != null;
+            var z = _users.Where(kvp => kvp.Value.Adress.Name == name).Select(x => x.Value).FirstOrDefault();
+            result.Success = z != null;
+            result.Value = z;
             return result;
         }
 
         public async  Task<Result<User>> GetUserByUserName(string name)
         {
             var result = new Result<User>();
-            result.Value = _users.Where(kvp => kvp.Value.Name == name).Select(x => x.Value).FirstOrDefault();
-            result.Success = result.Value != null;
+            var z = _users.Where(kvp => kvp.Value.Name == name).Select(x => x.Value).FirstOrDefault();
+            result.Success = z != null;
+            result.Value = z;
             return result;
         }
 

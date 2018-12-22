@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.Output.NetworkAccess;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
 
-namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators
+namespace Andromedarproject.MessageRouter.ContentMessageServices.OutputGenerators
 {
     public interface IOutputGenerator<TContent>
     {

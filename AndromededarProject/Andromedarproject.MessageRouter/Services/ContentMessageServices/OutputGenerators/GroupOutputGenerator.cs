@@ -5,8 +5,9 @@ using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageRouter.utils;
 using Andromedarproject.Users.Abstractions.Groups;
 using Andromedarproject.Output.NetworkAccess;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
 
-namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators
+namespace Andromedarproject.MessageRouter.ContentMessageServices.OutputGenerators
 {
     public class GroupOutputGenerator<TContent> : OutputGenerator<TContent>
     {       

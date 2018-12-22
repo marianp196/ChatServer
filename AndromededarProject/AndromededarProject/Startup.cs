@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Andromedarproject.MessageRouter.Services.TextContentMessage;
+using Andromedarproject.MessageRouter.Services.ContentMessageServices;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
 
 namespace AndromededarProject
 {
@@ -32,9 +33,10 @@ namespace AndromededarProject
 
             services.TryAddInstanceInformation();
 
-            services.TryAddClientOutputMoq<TextContent>().TryAddTextContentService();
+            services.TryAddClientOutputMoq<TextContent>().TryAddContentService<TextContent>();
 
             services.AddSignalR();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
