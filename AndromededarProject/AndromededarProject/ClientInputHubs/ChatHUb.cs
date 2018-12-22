@@ -3,13 +3,15 @@ using Andromedarproject.MessageDto.Input;
 using Andromedarproject.MessageRouter.BasicMessagePipe;
 using AndromededarProject.Web.Authetication;
 using AndromededarProject.Web.ConnectionPool;
+using ChatserverProtokoll.Input;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ClientInputHubs
 {
-    public class ChatHub : Hub
+    public abstract class ChatHub : Hub
     {
         public ChatHub(IContentRouter<TextContent> router, IConnectionPool connectionPool)
         {
@@ -17,30 +19,70 @@ namespace AndromededarProject.Web.ClientInputHubs
             _connectionPool = connectionPool;
         }
 
-        public async Task InitConnection(string user, AuthenticationDto message)
+        
+        public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
         {
-            //ToDo geschiet mmit Adresse anmelden
-            //Passwort lesen
-            //Nachrichten aus Container holen
-            _connectionPool.Add(message.Adress, Context.ConnectionId);
+            var messageDto = message.ConvertToMessage();
+            try
+            {
+                await _router.Rout(new UserDto { Name = "User" },  messageDto);
+            }
+            catch (NotValidException e)
+            {
+                if (e.MessageViolations == null)
+                {
+                    await sendResponse(new MessageResult
+                    {
+                        ClientID = message.Id,
+                        State = EState.Error,
+                        Errors = 
+                        new Error[] {new Error { Code = "unkn", Message = e.Message} }
+                        
+                    });
+                    return;
+                }
+
+                var errors = e.MessageViolations.Select(x => new Error { Code = x.Code, Message = x.Text });
+                await sendResponse(new MessageResult
+                {
+                    ClientID = message.Id,
+                    State = EState.Error,
+                    Errors = errors
+                });
+                return;
+            }
+            catch (Exception e)
+            {
+                await sendResponse(new MessageResult
+                {
+                    ClientID = message.Id,
+                    State = EState.Error,
+                    Errors =
+                        new Error[] { new Error { Code = "unkn", Message = e.Message } }
+
+                });
+                return;
+            }
+
+            
         }
 
-        public async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
+        public override async Task OnConnectedAsync()
         {
-            if (!_connectionPool.TryGetValue(message.Sender, out var obj))
-                return;
+            //Hier müsste dann noch das initialize ausgeführt werden.
+            await base.OnConnectedAsync();
+            _connectionPool.Add("User", Context.ConnectionId);
+        }
 
-            var messageDto = new Message<TextContent>();
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            await base.OnDisconnectedAsync(exception);
+            _connectionPool.Remove("User");
+        }
 
-            //testadten
-            messageDto.ClientMessageId = Guid.NewGuid();
-            messageDto.ClientTimestamp = DateTime.UtcNow;
-
-            messageDto.Sender = message.Sender;
-            messageDto.Traget = message.Target;
-            messageDto.Content = message.Content;
-
-            await _router.Rout(new UserDto {Name = "User" }, messageDto);
+        private async Task sendResponse(MessageResult obj)
+        {
+            Clients.Caller.SendCoreAsync("MessageResult", new object[] { obj });
         }
 
 

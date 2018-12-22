@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AndromededarProject.Web.ConnectionPool
 {
-    public class ConnectionPool : Dictionary<Adress, string>,  IConnectionPool
+    public class ConnectionPool : Dictionary<string, string>,  IConnectionPool
     {
     }
 }

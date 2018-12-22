@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ConnectionPool
 {
-    public interface IConnectionPool : IDictionary<Adress, string>
+    public interface IConnectionPool : IDictionary<string, string>
     {       
     }
 }
