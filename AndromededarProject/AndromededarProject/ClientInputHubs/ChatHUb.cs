@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ClientInputHubs
 {
-    public abstract class ChatHub : Hub
+    public class ChatHub : Hub
     {
         public ChatHub(IContentRouter<TextContent> router, IConnectionPool connectionPool)
         {
