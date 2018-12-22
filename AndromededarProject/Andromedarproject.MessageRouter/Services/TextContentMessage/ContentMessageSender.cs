@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
-using Andromedarproject.MessageRouter.Services.OutputServices;
+using Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators;
+using Andromedarproject.MessageRouter.Output.OutputServices;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage
 {
     public class ContentMessageSender<TContent> : BasicRouter<TContent>
     {
@@ -54,7 +54,7 @@ namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.Messag
         }        
 
         private readonly IEnumerable<IOutputGenerator<TContent>> _messageTypeCases;
-        private readonly OutputServices.IOutputService<TContent> _output;
+        private readonly IOutputService<TContent> _output;
     }
 }
 

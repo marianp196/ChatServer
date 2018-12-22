@@ -1,7 +1,8 @@
 ﻿using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.Output.NetworkAccess;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.OutputServices
+namespace Andromedarproject.MessageRouter.Output.OutputServices
 {
     public interface IOutputService<TContent>
     {

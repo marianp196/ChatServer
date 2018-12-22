@@ -1,10 +1,10 @@
-﻿using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.OutputCache;
-using Andromedarproject.MessageRouter.Settings;
+﻿using Andromedarproject.MessageRouter.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Andromedarproject.MessageRouter.Output.OutputCache;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.OutputServices
+namespace Andromedarproject.MessageRouter.Output.OutputServices
 {
     public static class ServiceCollectionExtension
     {

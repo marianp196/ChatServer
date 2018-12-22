@@ -1,11 +1,7 @@
-﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices
 {
     public static class ServiceCollectionExtension
     {

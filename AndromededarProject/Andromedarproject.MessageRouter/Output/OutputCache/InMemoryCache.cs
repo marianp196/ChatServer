@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 using Andromedarproject.MessageDto.Output;
 using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.OutputCache
+namespace Andromedarproject.MessageRouter.Output.OutputCache
 {
     public class InMemoryCache<TContent> : IOutputCache<TContent>, ICacheReader<TContent>
     {

@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Andromedarproject.MessageRouter.Output;
 using Andromedarproject.MessageRouter.Settings;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.OutputServices
+namespace Andromedarproject.MessageRouter.Output.OutputServices
 {
     public class OutputSwitchService<TContent> : IOutputService<TContent>
     {

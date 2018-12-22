@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices
 {
     public class ValidatorService<T> : IValidatorService<T>
     {

@@ -1,6 +1,6 @@
-﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices;
-using Andromedarproject.MessageRouter.Services.OutputCache;
-using Andromedarproject.MessageRouter.Services.OutputServices;
+﻿using Andromedarproject.MessageRouter.BasicMessagePipe;
+using Andromedarproject.MessageRouter.Output.OutputCache;
+using Andromedarproject.MessageRouter.Output.OutputServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Andromedarproject.MessageRouter.Services

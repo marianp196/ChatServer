@@ -1,9 +1,8 @@
-﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices;
-using System;
+﻿using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware
+
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware
 {
     public static class ValidationResultExtension
     {

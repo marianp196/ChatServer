@@ -1,4 +1,5 @@
 ﻿using Andromedarproject.MessageRouter.Output;
+using Andromedarproject.Output.NetworkAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

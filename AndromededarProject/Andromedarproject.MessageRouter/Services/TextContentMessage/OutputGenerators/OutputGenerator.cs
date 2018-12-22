@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.OutputServices;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators
 {
     public abstract class OutputGenerator<TContent> : IOutputGenerator<TContent>
     {     

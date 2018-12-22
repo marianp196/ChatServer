@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.OutputServices;
 using Andromedarproject.MessageRouter.utils;
+using Andromedarproject.Output.NetworkAccess;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators
 {
     public class UserOutputGenerator<TContent> : OutputGenerator<TContent>
     {

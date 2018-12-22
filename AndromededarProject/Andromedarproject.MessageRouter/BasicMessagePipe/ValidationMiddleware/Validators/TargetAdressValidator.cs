@@ -1,15 +1,14 @@
 ﻿using Andromedarproject.MessageDto.Adresses;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices;
+using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices;
 using Andromedarproject.MessageRouter.Settings;
 using Andromedarproject.Users.Abstractions;
 using Andromedarproject.Users.Abstractions.Groups;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.Validators
-{   
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.Validators
+{
     public class TargetAdressValidator<TContent> : IValidator<Message<TContent>>
     {
         public TargetAdressValidator(IUserReader userReader, IGroupReader groupReader, IInstanceInformation instanceInforrmation)

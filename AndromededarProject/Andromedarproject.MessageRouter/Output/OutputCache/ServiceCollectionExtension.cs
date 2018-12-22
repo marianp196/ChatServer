@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 
-namespace Andromedarproject.MessageRouter.Services.OutputCache
+namespace Andromedarproject.MessageRouter.Output.OutputCache
 {
     public static class ServiceCollectionExtension
     {

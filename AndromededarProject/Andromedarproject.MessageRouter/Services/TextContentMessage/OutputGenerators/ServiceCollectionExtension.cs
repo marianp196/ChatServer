@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators
 {
     public static class ServiceCollectionExtension
     {

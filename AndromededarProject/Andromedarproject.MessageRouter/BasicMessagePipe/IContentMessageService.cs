@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
+namespace Andromedarproject.MessageRouter.BasicMessagePipe
 {
     public interface IContentRouter<TContent>
     {

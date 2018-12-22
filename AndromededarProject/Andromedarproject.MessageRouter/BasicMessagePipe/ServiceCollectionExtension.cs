@@ -1,17 +1,16 @@
-﻿using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.MessageSenders.OutputGenerators;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.SenderAuthorizationMiddleware;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.Validators;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices;
-using Andromedarproject.MessageRouter.Services.OutputServices;
+﻿using Andromedarproject.MessageRouter.BasicMessagePipe.SenderAuthorizationMiddleware;
+using Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage;
+using Andromedarproject.MessageRouter.BasicMessagePipe.TextContentMessage.OutputGenerators;
+using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware;
+using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.Validators;
+using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices;
+using Andromedarproject.MessageRouter.Output.OutputServices;
 using Andromedarproject.Users.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Collections.Generic;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
+namespace Andromedarproject.MessageRouter.BasicMessagePipe
 {
     public static class ServiceCollectionExtension
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Output
+namespace Andromedarproject.Output.NetworkAccess
 {
 
 

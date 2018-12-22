@@ -1,10 +1,9 @@
-﻿using Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.ValidatorServices;
+﻿using Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.ValidatorServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.ValidationMiddleware.Validators
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.Validators
 {
     public class MetaDataValidator<TContent> : IValidator<Message<TContent>>
     {

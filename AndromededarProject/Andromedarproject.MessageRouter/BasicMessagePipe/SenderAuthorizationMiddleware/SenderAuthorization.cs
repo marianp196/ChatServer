@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices.SenderAuthorizationMiddleware
+namespace Andromedarproject.MessageRouter.BasicMessagePipe.SenderAuthorizationMiddleware
 {
     public class SenderAuthorization<TContent> : BasicRouter<TContent>
     {

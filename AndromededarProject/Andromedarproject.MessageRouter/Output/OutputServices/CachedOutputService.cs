@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Andromedarproject.MessageRouter.Output.OutputCache;
+using Andromedarproject.Output.NetworkAccess;
+using System;
 using System.Threading.Tasks;
-using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services.OutputCache;
 
-namespace Andromedarproject.MessageRouter.Services.OutputServices
+namespace Andromedarproject.MessageRouter.Output.OutputServices
 {
     public class CachedOutputService<TContent> : IOutputService<TContent>
     {

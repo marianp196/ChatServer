@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Contents;
 using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.Services;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
 using AndromededarProject.Web.ClientInputHubs;
 using AndromededarProject.Web.ConnectionPool;
 using AndromededarProject.Web.InstanceInformations;
@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Andromedarproject.MessageRouter.Services;
 
 namespace AndromededarProject
 {

@@ -1,8 +1,6 @@
 ﻿using Andromedarproject.MessageDto.Contents;
 using Andromedarproject.MessageDto.Input;
-using Andromedarproject.MessageDto.Output;
-using Andromedarproject.MessageRouter.Services.ContentMessageServices;
-using Andromedarproject.Users.Abstractions;
+using Andromedarproject.MessageRouter.BasicMessagePipe;
 using AndromededarProject.Web.Authetication;
 using AndromededarProject.Web.ConnectionPool;
 using Microsoft.AspNetCore.SignalR;

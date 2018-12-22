@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Andromedarproject.MessageDto.Adresses;
 
-namespace Andromedarproject.MessageRouter.Services.ContentMessageServices
+namespace Andromedarproject.MessageRouter.BasicMessagePipe
 {
     public abstract class BasicRouter<TContent> : IContentRouter<TContent>
     {
