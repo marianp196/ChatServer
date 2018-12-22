@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Andromedarproject.MessageDto.Contents;
-using Andromedarproject.MessageRouter.Output;
-using Andromedarproject.MessageRouter.BasicMessagePipe;
+﻿using Andromedarproject.MessageDto.Contents;
 using AndromededarProject.Web.ClientInputHubs;
 using AndromededarProject.Web.ConnectionPool;
 using AndromededarProject.Web.InstanceInformations;
-using AndromededarProject.Web.Output.Moq;
 using AndromededarProject.Web.Output.ServerClients;
 using AndromededarProject.Web.UserGroups.Moq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Andromedarproject.MessageRouter.Services;
+using Andromedarproject.MessageRouter.Services.TextContentMessage;
 
 namespace AndromededarProject
 {
@@ -40,9 +30,9 @@ namespace AndromededarProject
             services.TryAddConnectionPool();
             services.TryAddUserGroupMoq();
 
-            services.TryAddInstanceInformation().
-                TryAddClientOutputMoq<TextContent>().
-                TryAddServices<TextContent>();
+            services.TryAddInstanceInformation();
+
+            services.TryAddClientOutputMoq<TextContent>().TryAddTextContentService();
 
             services.AddSignalR();
         }
