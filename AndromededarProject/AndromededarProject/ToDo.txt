@@ -17,3 +17,4 @@ Dokumentenversendung
 
 ChatHub aufräumen
 
+Datums auf das Protokolloutputobjekt
