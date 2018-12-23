@@ -25,8 +25,12 @@ namespace AndromededarProject.Web.ConnectionPool
             if (!result.Success)
                 throw new KeyNotFoundException(user);
 
-            var adress = result.Value.Adress;           
-            _storage.Add(adress, new StorageObject<TConnectionID> { User = user, Value = connectionId });          
+            var adress = result.Value.Adress;
+            if(_storage.TryGetValue(adress, out var obj))
+            {
+                _storage.Remove(adress);
+            }
+            _storage.Add(adress, new StorageObject<TConnectionID> { User = user, Value = connectionId });
         }
 
         public void Remove(string user)

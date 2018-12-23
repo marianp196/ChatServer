@@ -1,3 +1,5 @@
+import { TextMessage } from './../chatProtokollDtos/TextMessage';
+import { Adress } from './../chatProtokollDtos/Adress';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 
@@ -12,12 +14,11 @@ export class ChatService {
   private _connection: HubConnection;
 
   public Connect(url: string): void {
-      // http://localhost:50481/ChatHub
       this._connection = new HubConnectionBuilder().withUrl(url).build();
       this._connection.start().then(() => console.log('he'));
   }
 
-  public SendMessage(): void {
-    return;
+  public SendMessage(message: TextMessage): void {
+    this._connection.send('SendTextMessage', 'User', message);
   }
 }
