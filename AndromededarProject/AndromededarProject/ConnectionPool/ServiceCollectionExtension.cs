@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Andromedarproject.MessageDto.Adresses;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace AndromededarProject.Web.ConnectionPool
     {
         public static IServiceCollection TryAddConnectionPool(this IServiceCollection sc)
         {
-            sc.TryAddSingleton<IConnectionPool, ConnectionPool>();
+            sc.TryAddSingleton<IDictionary<Adress, StorageObject<string>>, Dictionary<Adress, StorageObject<string>>>();
+            sc.TryAddTransient<IConnectionPoolReader<string>, ConnectionPool<string>>();
+            sc.TryAddTransient<IConnectionPoolWriter<string>, ConnectionPool<string>>();
             return sc;
         }
     }

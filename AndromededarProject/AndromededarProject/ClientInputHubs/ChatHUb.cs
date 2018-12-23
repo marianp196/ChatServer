@@ -13,7 +13,7 @@ namespace AndromededarProject.Web.ClientInputHubs
 {
     public class ChatHub : Hub
     {
-        public ChatHub(IContentRouter<TextContent> router, IConnectionPool connectionPool)
+        public ChatHub(IContentRouter<TextContent> router, IConnectionPoolWriter<string> connectionPool)
         {
             _router = router;
             _connectionPool = connectionPool;
@@ -23,7 +23,7 @@ namespace AndromededarProject.Web.ClientInputHubs
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
-            _connectionPool.Add("User", Context.ConnectionId);
+            await _connectionPool.Push("User", Context.ConnectionId);
             //Hier müsste dann noch das initialize ausgeführt werden. abholen liegengebliebener Nachrichten
         }
 
@@ -99,6 +99,6 @@ namespace AndromededarProject.Web.ClientInputHubs
 
 
         private readonly IContentRouter<TextContent> _router;
-        private readonly IConnectionPool _connectionPool;
+        private readonly IConnectionPoolWriter<string> _connectionPool;
     }
 }

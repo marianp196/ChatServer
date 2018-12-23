@@ -11,28 +11,29 @@ namespace AndromededarProject.Web.Output.ServerClients
 {
     public class ClientOutput<TContent> : IClientOutput<TContent>
     {
-        public ClientOutput(IHubContext<ChatHub> context, IConnectionPool connectionPool)
+        public ClientOutput(IHubContext<ChatHub> context, IConnectionPoolReader<string> connectionPool)
         {
             _context = context;
             _connectionPool = connectionPool;
         }
 
-        /*public async Task<bool> Send(BasicOutputMessage<TContent> message)
-        {
-            if (!_connectionPool.TryGetValue(message.Target, out var connectionId))
-                return false;
-
-            await _context.Clients.Client(connectionId).SendAsync("ReceiveTextMessage", message);
-            return true;
-        }*/
-
         public async Task<bool> Send(OutputDto<TContent> message)
         {
-            
+            if (!_connectionPool.TryRead(message.Traget, out var connectionId))
+                return false;
+            try
+            {
+                await _context.Clients.Client(connectionId)
+                    .SendAsync("ReceiveTextMessage", message.Convert());
+            }
+            catch (Exception e)
+            {
+                return false;
+            }            
             return true;
         }
 
         private IHubContext<ChatHub> _context;
-        private readonly IConnectionPool _connectionPool;
+        private readonly IConnectionPoolReader<string> _connectionPool;
     }
 }

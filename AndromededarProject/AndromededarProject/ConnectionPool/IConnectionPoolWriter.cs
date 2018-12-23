@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ConnectionPool
 {
-    public interface IConnectionPool : IDictionary<string, string>
-    {       
+    public interface IConnectionPoolWriter<TConnectionId>
+    {
+        Task Push(string user, TConnectionId connectionId);
+        void Remove(string user);
     }
 }
