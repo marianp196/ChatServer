@@ -19,10 +19,16 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
-    "@aspnet/signalr": "^1.1.0",
+    "@aspnet/signalr": "^3.0.0-preview-18579-0056",
+    "atob": "^2.0.3",
+    "btoa": "^1.1.2",
     "core-js": "^2.5.4",
+    "eventsource": "^1.0.5",
+    "msgpack5": "^3.5.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
+    "websocket": "^1.0.24",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

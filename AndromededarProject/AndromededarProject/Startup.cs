@@ -53,6 +53,13 @@ namespace AndromededarProject
 
             app.UseHttpsRedirection();
 
+            app.UseCors(builder => {
+                builder.AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/ChatHub");

@@ -14,7 +14,7 @@ export class ChatService {
   public Connect(url: string): void {
       // http://localhost:50481/ChatHub
       this._connection = new HubConnectionBuilder().withUrl(url).build();
-      this._connection.start();
+      this._connection.start().then(() => console.log('he'));
   }
 
   public SendMessage(): void {
