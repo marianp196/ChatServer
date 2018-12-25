@@ -38,8 +38,7 @@ namespace AndromededarProject.Web.ClientInputHubs
         public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
         {
             var messageDto = message.ConvertToMessage();
-			var username = Context.User.Identity.Name;
-			
+			var username = Context.User.Identity.Name;			
 
             try
             {
