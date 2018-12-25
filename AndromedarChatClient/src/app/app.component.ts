@@ -1,9 +1,8 @@
-import { Adress } from './chatProtokollDtos/Adress';
-import { TextMessage } from './chatProtokollDtos/TextMessage';
-import { ChatService } from './services/chat.service';
+import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
+import { TextMessage } from './services/chatServices/chatProtokollDtos/TextMessage';
+import { Adress } from './services/chatServices/chatProtokollDtos/Adress';
 import { Component } from '@angular/core';
-import { EAdressType } from './chatProtokollDtos/EAdressType';
-import { TextContent, Attechment } from './chatProtokollDtos/TextContent';
+import { ChatService } from './services/chatServices/chat.service';
 
 @Component({
   selector: 'app-root',

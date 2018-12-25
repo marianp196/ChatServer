@@ -1,0 +1,15 @@
+Authetifikation einbauen damit UserKontextKLar
+Authetifikationendpunkt gibt eigene Adresse zurück
+Kontakt Clientseitig umsetzen
+MoqService für KOntakte
+ChatService, bei dem man Modell anfragen kann zu einem Kontakt
+
+-------reicht erstmal für Client-----------
+
+Dann UserKomponente implementieren
+(Loggingkomponete)
+
+-------wieder Client----------
+Sauber um den Chatservice kümmern
+Muss auch funzen wenn Nachricht von Fremden reinkommt Oder Chatmodell noch nicht angefragt wurde
+
