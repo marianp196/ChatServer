@@ -10,6 +10,7 @@ namespace AndromededarProject.Web.Authetication
     //ToDo auf ChatProtokoll-Paket verlagern
     public class AuthenticationDto
     {
-        public Adress Adress { get; set; } 
+        public string Name { get; set; } 
+		public string Password { get; set; }
     }
 }

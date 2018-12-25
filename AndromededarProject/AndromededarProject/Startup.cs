@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Andromedarproject.MessageRouter.Services.ContentMessageServices;
 using Andromedarproject.MessageRouter.BasicMessagePipe;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace AndromededarProject
 {
@@ -36,8 +38,16 @@ namespace AndromededarProject
             services.TryAddClientOutputMoq<TextContent>().TryAddContentService<TextContent>();
 
             services.AddSignalR();
-            
-        }
+
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie();
+
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.Cookie.SameSite = SameSiteMode.None;
+			});
+
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -60,12 +70,16 @@ namespace AndromededarProject
                     .AllowCredentials();
             });
 
-            app.UseSignalR(routes =>
+			app.UseCookiePolicy();
+			app.UseAuthentication();
+
+			app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/ChatHub");
             });
+			
 
-            app.UseMvc();
+			app.UseMvc();
         }
     }
 }

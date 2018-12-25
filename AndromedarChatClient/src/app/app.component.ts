@@ -1,3 +1,4 @@
+import { AuthenticationService } from './services/authentication/authentication.service';
 import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
 import { TextMessage } from './services/chatServices/chatProtokollDtos/TextMessage';
 import { Adress } from './services/chatServices/chatProtokollDtos/Adress';
@@ -11,10 +12,12 @@ import { ChatService } from './services/chatServices/chat.service';
 })
 
 export class AppComponent {
-  constructor(private hubConnection: ChatService) {}
+  constructor(private hubConnection: ChatService, private authService: AuthenticationService) {}
 
   public StartConnection(): void {
-    this.hubConnection.Connect('http://localhost:50481/ChatHub');
+    this.authService.Authenticate('User', '').subscribe(x =>
+      this.hubConnection.Connect('http://localhost:50481/ChatHub'));
+
     console.log('hallo');
   }
 

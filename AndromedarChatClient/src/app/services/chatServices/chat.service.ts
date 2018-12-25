@@ -10,7 +10,6 @@ import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet
 export class ChatService {
 
   constructor() { }
-
   private _connection: HubConnection;
 
   public Connect(url: string): void {
@@ -22,7 +21,6 @@ export class ChatService {
     if (this._connection.state === HubConnectionState.Disconnected) {
       return false;
     }
-
     this._connection.send('SendTextMessage', 'User', message);
 
     return true;

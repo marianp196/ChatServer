@@ -4,6 +4,7 @@ using Andromedarproject.MessageRouter.BasicMessagePipe;
 using AndromededarProject.Web.Authetication;
 using AndromededarProject.Web.ConnectionPool;
 using ChatserverProtokoll.Input;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.ClientInputHubs
 {
+	[Authorize]
     public class ChatHub : Hub
     {
         public ChatHub(IContentRouter<TextContent> router, IConnectionPoolWriter<string> connectionPool)
@@ -36,9 +38,12 @@ namespace AndromededarProject.Web.ClientInputHubs
         public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
         {
             var messageDto = message.ConvertToMessage();
+			var username = Context.User.Identity.Name;
+			
+
             try
             {
-                await _router.Rout(new UserDto { Name = "User" }, messageDto);
+                await _router.Rout(new UserDto { Name = username }, messageDto);
             }
             catch (NotValidException e)
             {

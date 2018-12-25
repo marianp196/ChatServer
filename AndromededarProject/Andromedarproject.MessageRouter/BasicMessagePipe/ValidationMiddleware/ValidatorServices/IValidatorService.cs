@@ -15,10 +15,7 @@ namespace Andromedarproject.MessageRouter.BasicMessagePipe.ValidationMiddleware.
     {
         public IEnumerable<Violation> Violations { get; set; }
 
-        public bool IsViolated()
-        {
-            return Violations.Where(v => v.Type == EViolationType.Error).Count() > 0;
-        }
+        public bool IsViolated() => Violations.Where(v => v.Type == EViolationType.Error).Count() > 0;
     }
 
     public class Violation
