@@ -1,0 +1,9 @@
+
+ChatService:
+  RegisterMethode auf Adresse
+  RegisterMethode auf unbekannte Adresse
+  Methode für Textnachricht versenden
+
+Kontaktservice bei dem man Kontakt mit Adresse anfragen kann
+
+Dann Kontaktservice mit persistierten Kontakten

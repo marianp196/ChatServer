@@ -1,9 +1,10 @@
+import { ContactsService } from './services/contacts/contacts.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
 import { TextMessage } from './services/chatServices/chatProtokollDtos/TextMessage';
 import { Adress } from './services/chatServices/chatProtokollDtos/Adress';
 import { Component } from '@angular/core';
-import { ChatService } from './services/chatServices/chat.service';
+import { ChatHubService } from './services/chatServices/chatHub/chatHub.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,17 @@ import { ChatService } from './services/chatServices/chat.service';
 })
 
 export class AppComponent {
-  constructor(private hubConnection: ChatService, private authService: AuthenticationService) {}
+  constructor(private hubConnection: ChatHubService, private authService: AuthenticationService,
+                public contacts: ContactsService) {}
 
   public StartConnection(): void {
     this.authService.Authenticate('User', '').subscribe(x =>
       this.hubConnection.Connect('http://localhost:50481/ChatHub'));
-
     console.log('hallo');
+
+    /*this.contacts.GetContacts().forEach(element => {
+        console.log(element.Name);
+      });*/
   }
 
   public SendMessage(): void {
@@ -41,7 +46,6 @@ export class AppComponent {
       Text: ['Hallo'],
       Attechments: []
     };
-
     this.hubConnection.SendMessage(message);
   }
 }

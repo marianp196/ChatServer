@@ -1,4 +1,4 @@
-Authetifikation einbauen damit UserKontextKLar
+--Authetifikation einbauen damit UserKontextKLar--
 Authetifikationendpunkt gibt eigene Adresse zurück
 Kontakt Clientseitig umsetzen
 MoqService für KOntakte

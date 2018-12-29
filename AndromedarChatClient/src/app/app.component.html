@@ -2,5 +2,9 @@
 <div style="text-align:center">
   <button (click) = "StartConnection()"></button>
   <button (click) = "SendMessage()"></button>
+
+  <div *ngFor="let item of this.contacts.GetContacts() | async">
+      {{item.Name}}
+  </div>
 </div>
 <router-outlet></router-outlet>
