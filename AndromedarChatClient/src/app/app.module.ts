@@ -1,22 +1,28 @@
+import { ChatHubService } from './services/chatServices/chatHub/chatHub.service';
+import { AuthGuard } from './login/AuthGuard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ContactsListComponent } from './contacts-list/contacts-list.component';
+import { LoginComponent } from './login/login.component';
+import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactsListComponent
+    LoginComponent,
+    ChatMessangerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ChatHubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

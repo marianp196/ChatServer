@@ -4,9 +4,9 @@ import { Adress } from '../chatProtokollDtos/Adress';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet/signalr';
 
-@Injectable({
+@Injectable(/*{
   providedIn: 'root'
-})
+}*/)
 
 export class ChatHubService {
 
@@ -33,6 +33,11 @@ export class ChatHubService {
     if(! this._connection || this._connection.state == HubConnectionState.Disconnected)
       throw new Error('Not Connected to State');
     return this._connection.stop();
+  }
+
+  public IsConnected(): boolean {
+    console.log(this._connection);
+    return this._connection && this._connection.state === HubConnectionState.Connected;
   }
 }
 

@@ -1,5 +1,3 @@
-import { ChatModel } from './services/chatServices/chatModels/chatModel';
-import { ChatModelService } from './services/chatServices/chatModels/chat-model.service';
 import { ContactsService } from './services/contacts/contacts.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
@@ -16,9 +14,8 @@ import { ChatHubService } from './services/chatServices/chatHub/chatHub.service'
 
 export class AppComponent implements OnInit {
   constructor(private hubConnection: ChatHubService, private authService: AuthenticationService,
-                public contacts: ContactsService, private chatService: ChatModelService) {}
+                public contacts: ContactsService) {}
 
-  private chatModelList: ChatModel[] = [];
 
   public StartConnection(): void {
 
@@ -26,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.authService.Authenticate('User', '').subscribe(x => {
+   /* this.authService.Authenticate('User', '').subscribe(x => {
 
       this.hubConnection.Connect('http://localhost:50481/ChatHub').then(() => {
         this.chatService.Init();
@@ -40,7 +37,7 @@ export class AppComponent implements OnInit {
           });
         });
       });
-    });
+    });*/
   }
 
   public SendMessage(): void {
