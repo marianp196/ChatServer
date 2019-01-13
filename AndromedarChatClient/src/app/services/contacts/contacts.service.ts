@@ -18,7 +18,7 @@ export class ContactsService {
         AdressType: EAdressType.User,
         Name: '001',
         Server: 'MyHome'
-      },
+      } as Adress,
       Name: 'Otto',
       Prename: 'Otto',
       DateOfBirth: null
@@ -29,7 +29,7 @@ export class ContactsService {
         AdressType: EAdressType.User,
         Name: '002',
         Server: 'MyHome'
-      },
+      } as Adress,
       Name: 'Manfred',
       Prename: 'Manfred',
       DateOfBirth: null
@@ -41,12 +41,13 @@ export class ContactsService {
         AdressType: EAdressType.User,
         Name: '003',
         Server: 'MyHome'
-      },
+      } as Adress,
       Name: 'GeileGruppe',
       Prename: null,
       DateOfBirth: null
     };
     resultList.push(contact);
+    console.log('test');
     return new Observable<Contact[]>( o => o.next(resultList));
   }
 }

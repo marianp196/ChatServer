@@ -35,7 +35,7 @@ namespace AndromededarProject.Web.ClientInputHubs
             _connectionPool.Remove("User");
         }
 
-        public virtual async Task SendTextMessage(string user, BasicInputMessage<TextContent> message)
+        public virtual async Task SendTextMessage(BasicInputMessage<TextContent> message)
         {
             var messageDto = message.ConvertToMessage();
 			var username = Context.User.Identity.Name;			

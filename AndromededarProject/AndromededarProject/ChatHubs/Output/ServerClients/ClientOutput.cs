@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 
 namespace AndromededarProject.Web.Output.ServerClients
+
 {
     public class ClientOutput<TContent> : IClientOutput<TContent>
     {

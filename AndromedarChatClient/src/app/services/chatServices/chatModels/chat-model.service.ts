@@ -12,14 +12,18 @@ import { EAdressType } from '../chatProtokollDtos/EAdressType';
 @Injectable({
   providedIn: 'root'
 })
-export class ChatModelService{
+export class ChatModelService {
 
   constructor(private chatHub: ChatHubService) {
-    chatHub.RegisterOnIncomingMessage(message => this.pushIncomingMessage(message));
+
   }
 
   private unknownMessageDelegate: (message: ChatMessage) => void;
   private messageDelegates: MessageDelegate[] = new Array<MessageDelegate>();
+
+  public Init(): void {
+    this.chatHub.RegisterOnIncomingMessage(message => this.pushIncomingMessage(message));
+  }
 
   public Push (target: Adress, content: string): void {
     let message = new TextMessage();

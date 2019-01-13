@@ -1,9 +1,11 @@
+import { ChatModel } from './services/chatServices/chatModels/chatModel';
+import { ChatModelService } from './services/chatServices/chatModels/chat-model.service';
 import { ContactsService } from './services/contacts/contacts.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
 import { TextMessage } from './services/chatServices/chatProtokollDtos/TextMessage';
 import { Adress } from './services/chatServices/chatProtokollDtos/Adress';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatHubService } from './services/chatServices/chatHub/chatHub.service';
 
 @Component({
@@ -12,18 +14,33 @@ import { ChatHubService } from './services/chatServices/chatHub/chatHub.service'
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private hubConnection: ChatHubService, private authService: AuthenticationService,
-                public contacts: ContactsService) {}
+                public contacts: ContactsService, private chatService: ChatModelService) {}
+
+  private chatModelList: ChatModel[] = [];
 
   public StartConnection(): void {
-    this.authService.Authenticate('User', '').subscribe(x =>
-      this.hubConnection.Connect('http://localhost:50481/ChatHub'));
-    console.log('hallo');
 
-    /*this.contacts.GetContacts().forEach(element => {
-        console.log(element.Name);
-      });*/
+    console.log('hallo');
+  }
+
+  public ngOnInit(): void {
+    this.authService.Authenticate('User', '').subscribe(x => {
+
+      this.hubConnection.Connect('http://localhost:50481/ChatHub').then(() => {
+        this.chatService.Init();
+        this.contacts.GetContacts().subscribe(contactList => {
+
+          contactList.forEach(con => {
+            let model = new ChatModel(con, []);
+            this.chatModelList.push(model);
+            this.chatService.RegisterOnAdress(con.Adress, model.AddMessage);
+            console.log(con.Name + 'hi');
+          });
+        });
+      });
+    });
   }
 
   public SendMessage(): void {
