@@ -4,10 +4,9 @@ import { Adress } from '../chatProtokollDtos/Adress';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet/signalr';
 
-@Injectable(/*{
+@Injectable({
   providedIn: 'root'
-}*/)
-
+})
 export class ChatHubService {
 
   constructor() { }

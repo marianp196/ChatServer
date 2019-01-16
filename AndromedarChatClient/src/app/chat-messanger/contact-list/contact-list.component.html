@@ -1,0 +1,6 @@
+<div class="contact-list">
+  <app-contact-list-item *ngFor="let contact of Contacts"
+          class="contact-list-item" [Contact]="contact"
+          (click)="clickListItem(contact)">
+  </app-contact-list-item>
+</div>

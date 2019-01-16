@@ -9,12 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
 import { FormsModule } from '@angular/forms';
+import { ContactListComponent } from './chat-messanger/contact-list/contact-list.component';
+import { ContactListItemComponent } from './chat-messanger/contact-list/contact-list-item/contact-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ChatMessangerComponent
+    ChatMessangerComponent,
+    ContactListComponent,
+    ContactListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ChatHubService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

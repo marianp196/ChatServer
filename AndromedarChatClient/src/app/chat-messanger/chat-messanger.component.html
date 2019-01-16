@@ -1,3 +1,5 @@
-<p>
-  chat-messanger works!
-</p>
+<div class="messanger" *ngIf="Contacts">
+  <app-contact-list class="contact-list" [Contacts]="Contacts" [(Item)]="SelectedContact"></app-contact-list>
+  <span *ngIf="SelectedContact" >{{SelectedContact.Name}}</span>
+</div>
+
