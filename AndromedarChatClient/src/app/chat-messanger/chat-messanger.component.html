@@ -1,5 +1,14 @@
 <div class="messanger" *ngIf="Contacts">
-  <app-contact-list class="contact-list" [Contacts]="Contacts" [(Item)]="SelectedContact"></app-contact-list>
-  <span *ngIf="SelectedContact" >{{SelectedContact.Name}}</span>
+  <app-contact-list class="contact-list"
+                    [Contacts]="Contacts"
+                    [(Item)]="SelectedContact">
+  </app-contact-list>
+  <app-text-messanger
+        *ngIf="SelectedContact"
+        class="text-messanger"
+        [Contact]="SelectedContact"
+        [Messages]="Messages"
+        (onNewMessage)="onSendMessage($event)">
+  </app-text-messanger>
 </div>
 

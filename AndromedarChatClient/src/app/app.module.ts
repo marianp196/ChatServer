@@ -11,6 +11,7 @@ import { ChatMessangerComponent } from './chat-messanger/chat-messanger.componen
 import { FormsModule } from '@angular/forms';
 import { ContactListComponent } from './chat-messanger/contact-list/contact-list.component';
 import { ContactListItemComponent } from './chat-messanger/contact-list/contact-list-item/contact-list-item.component';
+import { TextMessangerComponent } from './chat-messanger/text-messanger/text-messanger.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ContactListItemComponent } from './chat-messanger/contact-list/contact-
     LoginComponent,
     ChatMessangerComponent,
     ContactListComponent,
-    ContactListItemComponent
+    ContactListItemComponent,
+    TextMessangerComponent
   ],
   imports: [
     BrowserModule,

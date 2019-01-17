@@ -1,0 +1,16 @@
+<div class="header">
+  {{Contact.Prename + "  " + Contact.Name}}
+</div>
+<div class="messanger" *ngIf="Messages">
+  <div  *ngFor="let message of Messages">
+    <div class="ownMessage" *ngIf="isOwn(message.Partner)" >
+        {{message.Text}}
+    </div>
+    <div class="partnerMessage" *ngIf="!isOwn(message.Partner)">
+        {{message.Text}}
+    </div>
+  </div>
+</div>
+<div class="newMessage">
+  <input type="text" [(ngModel)]="messsageInput" ><button (click)="onSendMessage()">Send Message</button>
+</div>

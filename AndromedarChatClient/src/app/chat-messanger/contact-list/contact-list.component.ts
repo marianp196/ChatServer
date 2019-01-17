@@ -10,14 +10,18 @@ export class ContactListComponent implements OnInit {
 
   constructor() { }
 
-  @Input() public Contacts: Contact[] = [];
+  @Input()
+  public Contacts: Contact[] = [];
 
   //Item Two way DataBinding
-  @Input() public set Item(value: Contact): void {
+  @Input()
+  public set Item(value: Contact): void {
     this._item = value;
     this.ItemChange.emit(value);
   }
-  @Output() public ItemChange: EventEmitter<Contact> = new EventEmitter<Contact>();
+
+  @Output()
+  public ItemChange: EventEmitter<Contact> = new EventEmitter<Contact>();
   private _item: Contact;
 
   ngOnInit() {

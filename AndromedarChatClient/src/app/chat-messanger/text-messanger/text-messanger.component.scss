@@ -1,0 +1,17 @@
+.header{
+  height: 50px;
+}
+.messanger{
+  height:  calc(100% - 90px);
+  border: 1px solid green;
+  overflow: scroll;
+  .ownMessage{
+    color: aqua;
+  }
+  .partnerMessage{
+    color: red;
+  }
+}
+.newMessage{
+  height: 40px;
+}
