@@ -25,14 +25,14 @@ namespace AndromededarProject.Web.ClientInputHubs
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
-            await _connectionPool.Push("User", Context.ConnectionId);
+            await _connectionPool.Push(Context.User.Identity.Name, Context.ConnectionId);
             //Hier müsste dann noch das initialize ausgeführt werden. abholen liegengebliebener Nachrichten
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             await base.OnDisconnectedAsync(exception);
-            _connectionPool.Remove("User");
+            _connectionPool.Remove(Context.User.Identity.Name);
         }
 
         public virtual async Task SendTextMessage(BasicInputMessage<TextContent> message)

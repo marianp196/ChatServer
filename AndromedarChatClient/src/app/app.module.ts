@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactListComponent } from './chat-messanger/contact-list/contact-list.component';
 import { ContactListItemComponent } from './chat-messanger/contact-list/contact-list-item/contact-list-item.component';
 import { TextMessangerComponent } from './chat-messanger/text-messanger/text-messanger.component';
+import { TextMessangerContentComponent } from './chat-messanger/text-messanger-content/text-messanger-content.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TextMessangerComponent } from './chat-messanger/text-messanger/text-mes
     ChatMessangerComponent,
     ContactListComponent,
     ContactListItemComponent,
-    TextMessangerComponent
+    TextMessangerComponent,
+    TextMessangerContentComponent
   ],
   imports: [
     BrowserModule,

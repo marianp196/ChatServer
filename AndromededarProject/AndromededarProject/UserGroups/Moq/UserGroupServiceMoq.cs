@@ -21,24 +21,34 @@ namespace AndromededarProject.Web.UserGroups.Moq
 
             var user = new User();
             user.ID = Guid.NewGuid();
-            user.Name = "User";
+            user.Name = "otto";
             user.Password = "password";
             user.Adress = new Adress();
-            user.Adress.Name = "adress1";
+            user.Adress.Name = "001";
             user.Adress.Server = "MyHome";
             _users.Add(user.ID, user);
             usrs.Add(user);
 
             user = new User();
             user.ID = Guid.NewGuid();
-            user.Name = "User1";
+            user.Name = "manfred";
             user.Password = "password";
             user.Adress = new Adress();
-            user.Adress.Name = "adress2";
+            user.Adress.Name = "002";
             user.Adress.Server = "MyHome";
             _users.Add(user.ID, user);
             usrs.Add(user);
-        }
+
+			user = new User();
+			user.ID = Guid.NewGuid();
+			user.Name = "helmut";
+			user.Password = "password";
+			user.Adress = new Adress();
+			user.Adress.Name = "003";
+			user.Adress.Server = "MyHome";
+			_users.Add(user.ID, user);
+			usrs.Add(user);
+		}
 
         public bool PasswordValid(User user, string input)
         {

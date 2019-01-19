@@ -35,7 +35,7 @@ namespace AndromededarProject
 
             services.TryAddInstanceInformation();
 
-            services.TryAddClientOutputMoq<TextContent>().TryAddContentService<TextContent>();
+            services.TryAddClientOutput<TextContent>().TryAddContentService<TextContent>();
 
             services.AddSignalR();
 

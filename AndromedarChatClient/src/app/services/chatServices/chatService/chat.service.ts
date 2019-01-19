@@ -15,7 +15,20 @@ import { NEXT } from '@angular/core/src/render3/interfaces/view';
 })
 export class ChatService {
 
-  constructor(private chatHub: ChatHubService, private identityService: IdentityService ) { }
+  constructor(private chatHub: ChatHubService, private identityService: IdentityService ) {
+    this.chatHub.RegisterOnIncomingMessage(incoming => {
+        let senderAdress = incoming.Sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
+        let filteredAressHandlers = this.adressHandles.
+            filter(a => a.Adress.Name === senderAdress.Name && a.Adress.Server === senderAdress.Server);
+
+        let message = new IncomingChatMessage();
+        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
+                             ? incoming.Content.Text[0] : '';
+        filteredAressHandlers.forEach(handler => handler.Handle(message));
+    });
+  }
+
+  private adressHandles: AdressHandler[] = [];
 
   public SendTextMessage(target: Adress, message: String): Observable<MessageResponse> {
 
@@ -36,7 +49,7 @@ export class ChatService {
   }
 
   public RegisterOnAdress(adress: Adress, onIncoming: (msg: IncomingChatMessage) => void) {
-
+    this.adressHandles.push({Adress: adress, Handle: onIncoming});
   }
 
   public RegisterOnUnknownAdress(onIncoming: (msg: IncomingChatMessage) => void) {
@@ -59,4 +72,9 @@ export class ChatService {
   public IsConnected(): boolean {
     return true;
   }
+}
+
+class AdressHandler {
+  public Adress: Adress;
+  public Handle: (msg: IncomingChatMessage) => void;
 }

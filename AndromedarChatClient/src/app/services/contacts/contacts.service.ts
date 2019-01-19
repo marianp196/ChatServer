@@ -43,8 +43,8 @@ export class ContactsService {
         Name: '003',
         Server: 'MyHome'
       } as Adress,
-      Name: 'GeileGruppe',
-      Prename: null,
+      Name: 'Helmut',
+      Prename: 'Helmut',
       DateOfBirth: null
     };
     resultList.push(contact);

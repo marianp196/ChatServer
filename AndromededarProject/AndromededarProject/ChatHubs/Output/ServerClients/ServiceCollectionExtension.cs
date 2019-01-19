@@ -8,11 +8,11 @@ namespace AndromededarProject.Web.Output.ServerClients
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection TryAddClientOutputMoq<TContent>(this IServiceCollection sc)
+        public static IServiceCollection TryAddClientOutput<TContent>(this IServiceCollection sc)
         {
 
             sc.TryAddSingleton<IServerOutput<TContent>, ConsoleServerOutput<TContent>>();
-            sc.TryAddSingleton<IClientOutput<TContent>, ConsoleClientOutput<TContent>>();
+            sc.TryAddSingleton<IClientOutput<TContent>, ClientOutput<TContent>>();
             return sc;
         }
     }
