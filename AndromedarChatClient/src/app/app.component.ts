@@ -1,8 +1,8 @@
 import { ContactsService } from './services/contacts/contacts.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
-import { EAdressType } from './services/chatServices/chatProtokollDtos/EAdressType';
-import { TextMessage } from './services/chatServices/chatProtokollDtos/TextMessage';
-import { Adress } from './services/chatServices/chatProtokollDtos/Adress';
+import { EAdressType } from './services/chatServices/chatHub/chatProtokollDtos/EAdressType';
+import { TextMessage } from './services/chatServices/chatHub/chatProtokollDtos/TextMessage';
+import { Adress } from './services/chatServices/chatHub/chatProtokollDtos/Adress';
 import { Component, OnInit } from '@angular/core';
 import { ChatHubService } from './services/chatServices/chatHub/chatHub.service';
 

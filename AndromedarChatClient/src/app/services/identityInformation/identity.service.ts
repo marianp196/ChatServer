@@ -1,8 +1,7 @@
 import { MyAdressInfo } from './MyAdressInfo';
 import { HttpClient } from '@angular/common/http';
-import { Adress } from './../chatServices/chatProtokollDtos/Adress';
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable,  } from 'rxjs';
+import { ReplaySubject, Observable, Subscriber,  } from 'rxjs';
 import { map, filter, catchError, mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -15,14 +14,24 @@ export class IdentityService {
 
   public GetMyAdress(): Observable<MyAdressInfo> {
 
-    return new Observable<MyAdressInfo>(observer => {
+    let result = new Observable<MyAdressInfo>(subscrib => {
       if (this.CachedMyAdressInfo) {
-        observer.next(this.CachedMyAdressInfo);
+        subscrib.next(this.CachedMyAdressInfo);
+        subscrib.complete();
       } else {
-        this.http.get<MyAdressInfo>('http://localhost:50481/api/MyAdressController',
-            {withCredentials: true}).subscribe(observer);
+        this.getAdressInfoFromServer(subscrib);
       }
-      observer.complete();
+    });
+
+    return result;
+  }
+
+  private getAdressInfoFromServer(observer: Subscriber<MyAdressInfo>) {
+    this.http.get<MyAdressInfo>('http://localhost:50481/api/MyAdress', {withCredentials: true})
+   .subscribe(adressInfo => {
+       this.CachedMyAdressInfo = adressInfo;
+        observer.next(adressInfo);
+        observer.complete();
     });
   }
 }

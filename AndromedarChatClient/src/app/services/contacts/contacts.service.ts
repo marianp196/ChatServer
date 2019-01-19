@@ -1,5 +1,6 @@
-import { EAdressType } from './../chatServices/chatProtokollDtos/EAdressType';
-import { Adress } from './../chatServices/chatProtokollDtos/Adress';
+import { Adress } from './../chatServices/chatHub/chatProtokollDtos/Adress';
+import { EAdressType } from './../chatServices/chatHub/chatProtokollDtos/EAdressType';
+
 import { Contact } from './contact';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

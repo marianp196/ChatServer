@@ -1,9 +1,1 @@
-
-ChatService:
-  RegisterMethode auf Adresse
-  RegisterMethode auf unbekannte Adresse
-  Methode für Textnachricht versenden
-
-Kontaktservice bei dem man Kontakt mit Adresse anfragen kann
-
-Dann Kontaktservice mit persistierten Kontakten
+1. Adress aus Contacts raushalten... einface id, die dann im chathub aufgelöst werden kann

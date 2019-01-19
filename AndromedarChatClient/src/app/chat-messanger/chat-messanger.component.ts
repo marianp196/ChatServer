@@ -1,3 +1,4 @@
+import { ChatService } from './../services/chatServices/chatService/chat.service';
 import { Message } from './text-messanger/dto/message';
 import { ContactsService } from './../services/contacts/contacts.service';
 import { Contact } from './../services/contacts/contact';
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatMessangerComponent implements OnInit {
 
-  constructor(private hub: ChatHubService, private contactsService: ContactsService) { }
+  constructor(private chatService: ChatService, private contactsService: ContactsService) { }
 
   public Contacts: Contact[];
   public SelectedContact: Contact;
@@ -27,7 +28,8 @@ export class ChatMessangerComponent implements OnInit {
   }
 
   public onSendMessage(message: String): void {
-    console.log(message);
+    this.chatService.SendTextMessage(this.SelectedContact.Adress, message)
+                        .subscribe(x => console.log(x));
   }
 
   private initforTest(): void {

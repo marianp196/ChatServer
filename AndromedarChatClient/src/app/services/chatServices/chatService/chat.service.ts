@@ -1,29 +1,38 @@
+import { Adress } from './../chatHub/chatProtokollDtos/Adress';
+import { IdentityService } from './../../identityInformation/identity.service';
+import { MessageResponse } from './MessageResponse';
 import { Message } from './../../../chat-messanger/text-messanger/dto/message';
-import { TextMessage } from './../chatProtokollDtos/TextMessage';
-import { Adress } from './../chatProtokollDtos/Adress';
+import { TextMessage } from '../chatHub/chatProtokollDtos/TextMessage';
 import { ChatHubService } from './../chatHub/chatHub.service';
 import { Injectable } from '@angular/core';
 import {IncomingChatMessage } from './IncomingChatMessage';
 import { Guid } from "guid-typescript";
+import { Observable, Subscribable, Subscriber } from 'rxjs';
+import { NEXT } from '@angular/core/src/render3/interfaces/view';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  constructor(private chatHub: ChatHubService) { }
 
-  public SendTextMessage(target: Adress, message: String): void {
-    if (!this.IsConnected()) {
-      return; //hier Exception
-    }
+  constructor(private chatHub: ChatHubService, private identityService: IdentityService ) { }
 
-    var textMessage = new TextMessage();
-    textMessage.Id =  Guid.create().toString();
-    textMessage.Sender = {};
-    textMessage.Target = target;
-    textMessage.Content = {Attechments: [], Text: [message]};
+  public SendTextMessage(target: Adress, message: String): Observable<MessageResponse> {
 
-    this.chatHub.SendMessage(textMessage);
+    let result = new Observable<MessageResponse>(subscrib => {
+      if (!this.IsConnected()) {
+        subscrib.error('Not connected');
+        subscrib.complete();
+        return;
+      }
+
+      this.identityService.GetMyAdress().subscribe(adress => {
+          this.doSendMessage(subscrib, target, adress.adress, message);
+        },
+          error => console.log('fehler'));
+    });
+
+    return result;
   }
 
   public RegisterOnAdress(adress: Adress, onIncoming: (msg: IncomingChatMessage) => void) {
@@ -34,7 +43,20 @@ export class ChatService {
 
   }
 
-  public IsConnected(): boolean {
+  private doSendMessage(subscrib: Subscriber<MessageResponse>, target: Adress, sender: Adress, text: String) {
+    var textMessage = new TextMessage();
+    textMessage.Id =  Guid.create().toString();
+    textMessage.Sender = sender;
+    textMessage.Target = target;
+    textMessage.Content = {Attechments: [], Text: [text]};
 
+    this.chatHub.SendMessage(textMessage).then(() => {
+      subscrib.next(new MessageResponse());
+      subscrib.complete();
+    });
+  }
+
+  public IsConnected(): boolean {
+    return true;
   }
 }
