@@ -15,7 +15,7 @@ export class ContactListComponent implements OnInit {
 
   //Item Two way DataBinding
   @Input()
-  public set Item(value: Contact): void {
+  public set Item(value: Contact) {
     this._item = value;
     this.ItemChange.emit(value);
   }

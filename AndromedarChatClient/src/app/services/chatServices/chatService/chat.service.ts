@@ -79,9 +79,11 @@ export class ChatService {
 
   private registerOnIncomingEvent(): void {
     this.chatHub.RegisterOnIncomingMessage(incoming => {
-      let senderAdress = incoming.Sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
-      let filteredAressHandlers = this.adressHandles.
+      const senderAdress = incoming.sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
+
+      const filteredAressHandlers = this.adressHandles.
           filter(a => a.Adress.Name === senderAdress.Name && a.Adress.Server === senderAdress.Server);
+
       this.createMessage(incoming)
         .subscribe(message => filteredAressHandlers.forEach(handler => handler.Handle(message)));
   });
@@ -89,15 +91,17 @@ export class ChatService {
 
   private createMessage(incoming: TextMessageInput): Observable<ChatMessage> {
     return new Observable<ChatMessage>(sub => {
-      if (!incoming.Sender) {
+      const sender = incoming.sender;
+      console.log(sender);
+      if (!sender) {
         sub.error('sender nicht gesetzt');
       }
-      this.contactsService.GetContactByAdress(incoming.Sender).subscribe(contact => {
+      this.contactsService.GetContactByAdress(sender).subscribe(contact => {
         const message = new ChatMessage();
         message.Direction = EDirection.In;
         message.PartnerContactId = contact.Id;
-        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
-                           ? incoming.Content.Text[0] : '';
+        message.Message = (incoming.content.Text && incoming.content.Text.length > 0)
+                           ? incoming.content.Text[0] : '';
         message.Timestamp = new Date(); //hier noch unterscheiden serverzeit.... clientzeit
 
         sub.next(message);

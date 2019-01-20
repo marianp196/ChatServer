@@ -1,11 +1,11 @@
 import { TextContent } from './TextContent';
 import { Adress } from './Adress';
 export class TextMessageInput {
-  public ServerId: string;
+  public serverId: string;
 
-  public Sender: Adress;
-  public SenderGroup: Adress;
-  public Target: Adress;
+  public sender: Adress;
+  public tenderGroup: Adress;
+  public target: Adress;
 
-  public Content: TextContent;
+  public content: TextContent;
 }

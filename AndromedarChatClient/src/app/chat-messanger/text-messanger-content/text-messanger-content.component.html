@@ -3,11 +3,11 @@
 </div>
 <div class="messanger" *ngIf="Messages">
   <div  *ngFor="let message of Messages">
-    <div class="ownMessage" *ngIf="isOwn(message.Partner)" >
-        {{message.Text}}
+    <div class="ownMessage" *ngIf="isOwn(message)" >
+        {{message.Message}}
     </div>
-    <div class="partnerMessage" *ngIf="!isOwn(message.Partner)">
-        {{message.Text}}
+    <div class="partnerMessage" *ngIf="!isOwn(message)">
+        {{message.Message}}
     </div>
   </div>
 </div>
