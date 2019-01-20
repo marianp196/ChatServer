@@ -25,7 +25,20 @@ export class ChatHubService {
   }
 
   public RegisterOnIncomingMessage(input: (msg: TextMessageInput) => void): void {
-      this._connection.on('ReceiveTextMessage', x => input(x));
+      this._connection.on('ReceiveTextMessage', json => {
+      console.log(json);
+
+        const textMessageInput = new TextMessageInput();
+        textMessageInput.Content = {Text: json.content.text, Attechments: json.content.attechments};
+        textMessageInput.ServerId = json.serverId;
+        textMessageInput.Sender = {
+          Name: json.sender.name,
+          Server: json.sender.server,
+          AdressType: json.adressType
+        } as Adress;
+        console.log(textMessageInput);
+        input(textMessageInput);
+      });
   }
 
   public Disconnect(): Promise<void> {

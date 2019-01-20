@@ -79,7 +79,7 @@ export class ChatService {
 
   private registerOnIncomingEvent(): void {
     this.chatHub.RegisterOnIncomingMessage(incoming => {
-      const senderAdress = incoming.sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
+      const senderAdress = incoming.Sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
 
       const filteredAressHandlers = this.adressHandles.
           filter(a => a.Adress.Name === senderAdress.Name && a.Adress.Server === senderAdress.Server);
@@ -91,7 +91,7 @@ export class ChatService {
 
   private createMessage(incoming: TextMessageInput): Observable<ChatMessage> {
     return new Observable<ChatMessage>(sub => {
-      const sender = incoming.sender;
+      const sender = incoming.Sender;
       console.log(sender);
       if (!sender) {
         sub.error('sender nicht gesetzt');
