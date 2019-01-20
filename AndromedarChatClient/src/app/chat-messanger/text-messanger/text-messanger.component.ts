@@ -10,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./text-messanger.component.scss']
 })
 export class TextMessangerComponent implements OnInit {
-  constructor(chatService: ChatService) {
+  constructor(private chatService: ChatService) {
 
   }
 
@@ -21,8 +21,8 @@ export class TextMessangerComponent implements OnInit {
     console.log("init");
   }
 
-  public onSendMessage(msg: String) {
-    console.log(msg + 'Hure');
+  public onSendMessage(msg: String): void {
+    this.chatService.SendTextMessage(this.Contact.Adress, msg).subscribe();
   }
 }
 

@@ -1,36 +1,32 @@
+import { Message } from './../../../chat-messanger/text-messanger-content/dto/message';
+import { ContactsService } from './../../contacts/contacts.service';
+import { ChatMessage, EDirection } from './ChatMessage';
 import { Adress } from './../chatHub/chatProtokollDtos/Adress';
 import { IdentityService } from './../../identityInformation/identity.service';
 import { MessageResponse } from './MessageResponse';
 import { TextMessage } from '../chatHub/chatProtokollDtos/TextMessage';
 import { ChatHubService } from './../chatHub/chatHub.service';
 import { Injectable } from '@angular/core';
-import {IncomingChatMessage } from './IncomingChatMessage';
 import { Guid } from "guid-typescript";
 import { Observable, Subscribable, Subscriber } from 'rxjs';
+import { TextMessageInput } from '../chatHub/chatProtokollDtos/TextMessageInput';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  constructor(private chatHub: ChatHubService, private identityService: IdentityService ) {
-    this.chatHub.RegisterOnIncomingMessage(incoming => {
-        let senderAdress = incoming.Sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
-        let filteredAressHandlers = this.adressHandles.
-            filter(a => a.Adress.Name === senderAdress.Name && a.Adress.Server === senderAdress.Server);
-
-        let message = new IncomingChatMessage();
-        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
-                             ? incoming.Content.Text[0] : '';
-        filteredAressHandlers.forEach(handler => handler.Handle(message));
-    });
+  constructor(private chatHub: ChatHubService,
+                private identityService: IdentityService,
+                private contactsService: ContactsService) {
+    this.registerOnIncomingEvent();
   }
 
   private adressHandles: AdressHandler[] = [];
 
   public SendTextMessage(target: Adress, message: String): Observable<MessageResponse> {
 
-    let result = new Observable<MessageResponse>(subscrib => {
+    return new Observable<MessageResponse>(subscrib => {
       if (!this.IsConnected()) {
         subscrib.error('Not connected');
         subscrib.complete();
@@ -40,17 +36,27 @@ export class ChatService {
       this.identityService.GetMyAdress().subscribe(adress => {
           this.doSendMessage(subscrib, target, adress.adress, message);
         },
-          error => console.log('fehler'));
+          error => console.log('fehler')
+      );
     });
-
-    return result;
   }
 
-  public RegisterOnAdress(adress: Adress, onIncoming: (msg: IncomingChatMessage) => void) {
-    this.adressHandles.push({Adress: adress, Handle: onIncoming});
+  public RegisterOnAdressWithName(name: String, adress: Adress, onIncoming: (msg: ChatMessage) => void) {
+    if (!name) {
+      name = Guid.create().toString();
+    }
+    const index = this.adressHandles.findIndex(x => x.Name === name);
+    if (index > -1) {
+      this.adressHandles.splice(index, 1);
+    }
+    this.adressHandles.push({Name: name, Adress: adress, Handle: onIncoming});
   }
 
-  public RegisterOnUnknownAdress(onIncoming: (msg: IncomingChatMessage) => void) {
+  public RegisterOnAdress(adress: Adress, onIncoming: (msg: ChatMessage) => void) {
+    this.RegisterOnAdressWithName(Guid.create().toString(), adress, onIncoming);
+  }
+
+  public RegisterOnUnknownAdress(onIncoming: (msg: ChatMessage) => void) {
 
   }
 
@@ -68,11 +74,40 @@ export class ChatService {
   }
 
   public IsConnected(): boolean {
-    return true;
+    return this.chatHub.IsConnected();
+  }
+
+  private registerOnIncomingEvent(): void {
+    this.chatHub.RegisterOnIncomingMessage(incoming => {
+      let senderAdress = incoming.Sender; // hier müsste natürlich noch die Gruppe berücksichtigt wedren
+      let filteredAressHandlers = this.adressHandles.
+          filter(a => a.Adress.Name === senderAdress.Name && a.Adress.Server === senderAdress.Server);
+      this.createMessage(incoming)
+        .subscribe(message => filteredAressHandlers.forEach(handler => handler.Handle(message)));
+  });
+  }
+
+  private createMessage(incoming: TextMessageInput): Observable<ChatMessage> {
+    return new Observable<ChatMessage>(sub => {
+      if (!incoming.Sender) {
+        sub.error('sender nicht gesetzt');
+      }
+      this.contactsService.GetContactByAdress(incoming.Sender).subscribe(contact => {
+        const message = new ChatMessage();
+        message.Direction = EDirection.In;
+        message.PartnerContactId = contact.Id;
+        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
+                           ? incoming.Content.Text[0] : '';
+        message.Timestamp = new Date(); //hier noch unterscheiden serverzeit.... clientzeit
+
+        sub.next(message);
+      });
+    });
   }
 }
 
 class AdressHandler {
+  public Name: String;
   public Adress: Adress;
-  public Handle: (msg: IncomingChatMessage) => void;
+  public Handle: (msg: ChatMessage) => void;
 }

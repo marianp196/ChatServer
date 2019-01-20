@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatMessangerComponent implements OnInit {
 
-  constructor(private chatService: ChatService, private contactsService: ContactsService) { }
+  constructor(private contactsService: ContactsService) { }
 
   public Contacts: Contact[];
   public SelectedContact: Contact;

@@ -10,11 +10,41 @@ import { Observable } from 'rxjs';
 })
 export class ContactsService {
 
-  constructor() { }
+  constructor() {
+    this.initMoqData();
+  }
+
+  private contacts: Contact[] = [];
 
   public GetContacts(): Observable<Contact[]> {
+    return new Observable<Contact[]>( o => o.next(this.contacts));
+  }
+
+  public GetContactById(id: string): Observable<Contact> { // Noch auf Observable umabuen
+    return new Observable<Contact>(sub => {
+      this.GetContacts().subscribe(contacts => {
+        const filteredList = contacts.filter(x => x.Id === id);
+        const firstOrDefault = filteredList.length > 0 ? filteredList[0] : null;
+        sub.next(firstOrDefault);
+      });
+    });
+  }
+
+  public GetContactByAdress(adress: Adress): Observable<Contact> { // Noch auf Observable umabuen
+    return new Observable<Contact>(sub => {
+      this.GetContacts().subscribe(contacts => {
+        const filtered = this.contacts.filter(x => x.Adress.Name === adress.Name
+          && x.Adress.Server === adress.Server);
+        const firstOrDefault = filtered.length > 0 ? filtered[0] : null;
+        sub.next(firstOrDefault);
+      });
+    });
+  }
+
+  public initMoqData(): void {
     let resultList = new Array<Contact>();
     let contact = {
+      Id: '001',
       Adress : {
         AdressType: EAdressType.User,
         Name: '001',
@@ -26,6 +56,7 @@ export class ContactsService {
     };
     resultList.push(contact);
     contact = {
+      Id: '002',
       Adress : {
         AdressType: EAdressType.User,
         Name: '002',
@@ -38,6 +69,7 @@ export class ContactsService {
     resultList.push(contact);
 
     contact = {
+      Id: '003',
       Adress : {
         AdressType: EAdressType.User,
         Name: '003',
@@ -48,7 +80,6 @@ export class ContactsService {
       DateOfBirth: null
     };
     resultList.push(contact);
-    console.log('test');
-    return new Observable<Contact[]>( o => o.next(resultList));
+    this.contacts = resultList;
   }
 }
