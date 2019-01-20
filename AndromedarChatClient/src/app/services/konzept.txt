@@ -1,1 +1,12 @@
 1. Adress aus Contacts raushalten... einface id, die dann im chathub aufgelöst werden kann
+
+In Liste eine Komponente für jeden Kontakt anzeigen.
+Mit ngIf entscheiden welche angezeigt wird.
+Prüfen wie das mit neuen Kontakten wäre...
+Perfomanz?
+
+In Messangerkomponente einen service anfragen, der alte nachrichten ausgibt..
+Registrierung auf event für neue Nachricht... dabei alten handle entfernen..
+Das heißt arbeiten auf dem servcie..
+Glaube, dass dies besser ist
+

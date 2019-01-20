@@ -6,9 +6,7 @@
   <app-text-messanger
         *ngIf="SelectedContact"
         class="text-messanger"
-        [Contact]="SelectedContact"
-        [Messages]="Messages"
-        (onNewMessage)="onSendMessage($event)">
+        [Contact]="SelectedContact">
   </app-text-messanger>
 </div>
 

@@ -1,14 +1,12 @@
 import { Adress } from './../chatHub/chatProtokollDtos/Adress';
 import { IdentityService } from './../../identityInformation/identity.service';
 import { MessageResponse } from './MessageResponse';
-import { Message } from './../../../chat-messanger/text-messanger/dto/message';
 import { TextMessage } from '../chatHub/chatProtokollDtos/TextMessage';
 import { ChatHubService } from './../chatHub/chatHub.service';
 import { Injectable } from '@angular/core';
 import {IncomingChatMessage } from './IncomingChatMessage';
 import { Guid } from "guid-typescript";
 import { Observable, Subscribable, Subscriber } from 'rxjs';
-import { NEXT } from '@angular/core/src/render3/interfaces/view';
 
 @Injectable({
   providedIn: 'root'
