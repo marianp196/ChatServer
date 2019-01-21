@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { ChatMessagePersistService } from './../../services/chatServices/chatMessagePersist/chat-message-persist.service';
 import { ChatMessage, EDirection } from './../../services/chatServices/chatService/ChatMessage';
 import { Message } from '../text-messanger-content/dto/message';
 import { ChatService } from './../../services/chatServices/chatService/chat.service';
@@ -11,7 +13,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./text-messanger.component.scss']
 })
 export class TextMessangerComponent implements OnInit {
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private messagePersist: ChatMessagePersistService) {
   }
 
   @Input()
@@ -27,7 +29,7 @@ export class TextMessangerComponent implements OnInit {
     return this._contact;
   }
 
-  public Messages: ChatMessage[] = [];
+  public Messages: ChatMessage[];
   public _contact: Contact;
 
   ngOnInit() {
@@ -35,21 +37,26 @@ export class TextMessangerComponent implements OnInit {
   }
 
   public onSendMessage(msg: String): void {
-    this.chatService.SendTextMessage(this.Contact.Adress, msg).subscribe();
-    this.Messages.push({
+    const message = {
       PartnerContactId: this.Contact.Id,
       Direction: EDirection.Out,
       Timestamp: new Date(),
       Message: msg
-    });
+    };
+    this.messagePersist.Push(message).subscribe();
+    this.chatService.SendTextMessage(this.Contact.Adress, msg).subscribe();
+    this.Messages.push(message);
+  }
+
+  public onReceiveMessage(msg: ChatMessage) {
+    this.Messages.push(chatMessage);
+    this.messagePersist.Push(chatMessage).subscribe();
   }
 
   private contactChanged(): void {
-    this.Messages = [];
-    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress, chatMessage => {
-      console.log('message recieved');
-      this.Messages.push(chatMessage);
-    });
+    this.Messages = null;
+    this.messagePersist.GetByContactID(this.Contact.Id).subscribe(messages => this.Messages = messages);
+    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress, this.onReceiveMessage);
   }
 }
 
