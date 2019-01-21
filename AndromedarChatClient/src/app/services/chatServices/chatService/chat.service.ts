@@ -100,8 +100,8 @@ export class ChatService {
         const message = new ChatMessage();
         message.Direction = EDirection.In;
         message.PartnerContactId = contact.Id;
-        message.Message = (incoming.content.Text && incoming.content.Text.length > 0)
-                           ? incoming.content.Text[0] : '';
+        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
+                           ? incoming.Content.Text[0] : '';
         message.Timestamp = new Date(); //hier noch unterscheiden serverzeit.... clientzeit
 
         sub.next(message);

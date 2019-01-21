@@ -18,6 +18,7 @@ namespace AndromededarProject.Web.Output.ServerClients
             result.Target = output.Traget;
             result.ServerId = output.Id;
             result.Target = output.Traget;
+			result.Content = output.Content;
 
             return result;
         }
