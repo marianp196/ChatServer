@@ -26,9 +26,8 @@ export class ChatHubService {
 
   public RegisterOnIncomingMessage(input: (msg: TextMessageInput) => void): void {
       this._connection.on('ReceiveTextMessage', json => {
-      console.log('json');
-      console.log(json);
 
+        //der ganze Bums muss irgendwie einfache gehen
         const textMessageInput = new TextMessageInput();
         textMessageInput.Content = {Text: json.content.text, Attechments: json.content.attechments};
         textMessageInput.ServerId = json.serverId;
@@ -37,8 +36,6 @@ export class ChatHubService {
           Server: json.sender.server,
           AdressType: json.adressType
         } as Adress;
-        console.log('textMessageInput');
-        console.log(textMessageInput);
         input(textMessageInput);
       });
   }

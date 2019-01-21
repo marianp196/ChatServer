@@ -1,3 +1,4 @@
+import { ChatMessage } from './../chatService/ChatMessage';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,11 +9,19 @@ export class ChatMessagePersistService {
 
   constructor() { }
 
-  public Push(): Observable<Boolean> {
+  private _storage: ChatMessage[] = [];
 
+  public Push(message: ChatMessage): Observable<Boolean> {
+    return new Observable(sub => {
+      this._storage.push(message);
+      sub.next(true);
+    });
   }
 
-  public GetByContactID(contactId: string) {
-
+  public GetByContactID(contactId: string): Observable<ChatMessage[]> {
+    return new Observable(sub => {
+      const filtered = this._storage.filter(x => x.PartnerContactId === contactId);
+      sub.next(filtered);
+    });
   }
 }
