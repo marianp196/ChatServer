@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 import { ChatMessagePersistService } from './../../services/chatServices/chatMessagePersist/chat-message-persist.service';
 import { ChatMessage, EDirection } from './../../services/chatServices/chatService/ChatMessage';
-import { Message } from '../text-messanger-content/dto/message';
 import { ChatService } from './../../services/chatServices/chatService/chat.service';
 import { Contact } from './../../services/contacts/contact';
 
@@ -32,10 +31,6 @@ export class TextMessangerComponent implements OnInit {
   public Messages: ChatMessage[];
   public _contact: Contact;
 
-  ngOnInit() {
-    console.log("init");
-  }
-
   public onSendMessage(msg: String): void {
     const message = {
       PartnerContactId: this.Contact.Id,
@@ -49,8 +44,8 @@ export class TextMessangerComponent implements OnInit {
   }
 
   public onReceiveMessage(msg: ChatMessage) {
-    this.Messages.push(chatMessage);
-    this.messagePersist.Push(chatMessage).subscribe();
+    this.Messages.push(msg);
+    this.messagePersist.Push(msg).subscribe();
   }
 
   private contactChanged(): void {
