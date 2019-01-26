@@ -22,6 +22,7 @@ export class ChatMessagePersistService {
     return new Observable(sub => {
       const filtered = this._storage.filter(x => x.PartnerContactId === contactId);
       sub.next(filtered);
+      console.log('messageliste ausgeben');
       sub.complete();
     });
   }

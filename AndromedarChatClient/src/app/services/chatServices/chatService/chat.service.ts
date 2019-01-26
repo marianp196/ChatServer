@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { Observable, Subscribable, Subscriber } from 'rxjs';
 import { TextMessageInput } from '../chatHub/chatProtokollDtos/TextMessageInput';
+import { MessageSenderService } from '../chatHub/message-sender.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class ChatService {
 
   constructor(private chatHub: ChatHubService,
                 private identityService: IdentityService,
-                private contactsService: ContactsService) {
+                private contactsService: ContactsService,
+                private messageSender: MessageSenderService) {
     this.registerOnIncomingEvent();
   }
 
@@ -67,7 +69,7 @@ export class ChatService {
     textMessage.Target = target;
     textMessage.Content = {Attechments: [], Text: [text]};
 
-    this.chatHub.SendMessage(textMessage).then(() => {
+    this.messageSender.SendMessage(textMessage).subscribe(() => {
       subscrib.next(new MessageResponse());
       subscrib.complete();
     });

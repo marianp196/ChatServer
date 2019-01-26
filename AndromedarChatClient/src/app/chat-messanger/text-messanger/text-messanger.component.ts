@@ -51,7 +51,7 @@ export class TextMessangerComponent implements OnInit {
   private contactChanged(): void {
     this.Messages = null;
     this.messagePersist.GetByContactID(this.Contact.Id).subscribe(messages => this.Messages = messages);
-    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress, this.onReceiveMessage);
+    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress, this.onReceiveMessage.bind(this));
   }
 }
 
