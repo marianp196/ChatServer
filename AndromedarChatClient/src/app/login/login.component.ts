@@ -28,7 +28,14 @@ export class LoginComponent implements OnInit {
                 console.log('loggedin');
                 this.router.navigate([this.getReturnUrl()]);
               }));
+  }
+
+  public onKeydown(event): void {
+    console.log(event.key);
+    if (event.key === 'Enter') {
+      this.onClick();
     }
+  }
 
   private getReturnUrl(): string {
     return this.route.snapshot.queryParams['returnUrl'] || '/';

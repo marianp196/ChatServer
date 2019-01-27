@@ -1,0 +1,17 @@
+@import './color';
+
+.input-element{
+  width: 100%;
+  height: 25px;
+  border-radius: 10px;
+  border-width: 0;
+  background: $input-element-background;
+  color: $input-element-foreground;
+  border: $foreground1;
+  text-align: center;
+}
+
+.button-element{
+  @extend .input-element;
+  background: $button-element;
+}
