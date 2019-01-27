@@ -1,9 +1,15 @@
 import { Contact } from './../../contacts/contact';
-export class ChatMessage {
+
+export class TextContent {
+  public Message: String;
+  //Attechments
+}
+
+export class ChatMessage<TContent> {
   public PartnerContactId: String;
   public Direction: EDirection;
   public Timestamp: Date;
-  public Message: String;
+  public Content: TContent;
 }
 
 export enum EDirection {

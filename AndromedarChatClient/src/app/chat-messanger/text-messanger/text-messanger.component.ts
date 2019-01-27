@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { ChatMessagePersistService } from './../../services/chatServices/chatMessagePersist/chat-message-persist.service';
-import { ChatMessage, EDirection } from './../../services/chatServices/chatService/ChatMessage';
+import { ChatMessage, EDirection, TextContent } from './../../services/chatServices/chatService/ChatMessage';
 import { ChatService } from './../../services/chatServices/chatService/chat.service';
 import { Contact } from './../../services/contacts/contact';
 
@@ -28,7 +28,7 @@ export class TextMessangerComponent implements OnInit {
     return this._contact;
   }
 
-  public Messages: ChatMessage[];
+  public Messages: ChatMessage<TextContent>[];
   public _contact: Contact;
 
   public onSendMessage(msg: String): void {
@@ -36,14 +36,14 @@ export class TextMessangerComponent implements OnInit {
       PartnerContactId: this.Contact.Id,
       Direction: EDirection.Out,
       Timestamp: new Date(),
-      Message: msg
+      Content: {Message: msg}
     };
     this.messagePersist.Push(message).subscribe();
-    this.chatService.SendTextMessage(this.Contact.Adress, msg).subscribe();
+    this.chatService.SendTextMessage(this.Contact.Adress, message.Content).subscribe();
     this.Messages.push(message);
   }
 
-  public onReceiveMessage(msg: ChatMessage) {
+  public onReceiveMessage(msg: ChatMessage<TextContent>) {
     this.Messages.push(msg);
     this.messagePersist.Push(msg).subscribe();
   }
@@ -51,7 +51,8 @@ export class TextMessangerComponent implements OnInit {
   private contactChanged(): void {
     this.Messages = null;
     this.messagePersist.GetByContactID(this.Contact.Id).subscribe(messages => this.Messages = messages);
-    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress, this.onReceiveMessage.bind(this));
+    this.chatService.RegisterOnAdressWithName('messanger', this.Contact.Adress,
+                                                        this.onReceiveMessage.bind(this));
   }
 }
 

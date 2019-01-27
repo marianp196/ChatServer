@@ -4,10 +4,10 @@
 <div class="messanger" *ngIf="Messages">
   <div  *ngFor="let message of Messages">
     <div class="ownMessage" *ngIf="isOwn(message)" >
-        {{message.Message}}
+        {{message.Content.Message}}
     </div>
     <div class="partnerMessage" *ngIf="!isOwn(message)">
-        {{message.Message}}
+        {{message.Content.Message}}
     </div>
   </div>
 </div>

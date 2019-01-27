@@ -1,4 +1,4 @@
-import { ChatMessage, EDirection } from './../../services/chatServices/chatService/ChatMessage';
+import { ChatMessage, EDirection, TextContent } from './../../services/chatServices/chatService/ChatMessage';
 import { Contact } from './../../services/contacts/contact';
 import { Message } from './dto/message';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -13,14 +13,14 @@ export class TextMessangerContentComponent implements OnInit {
   constructor() { }
 
   @Input() public Contact: Contact;
-  @Input() public Messages: ChatMessage[] = [];
+  @Input() public Messages: ChatMessage<TextContent>[] = [];
   @Input() public IsGroup: boolean = false;//irwann über Contact regeln
 
   @Output() public onNewMessage: EventEmitter<String> = new EventEmitter<String>();
 
   public messsageInput: String = '';
 
-  public isOwn(message: ChatMessage): boolean {
+  public isOwn(message: ChatMessage<TextContent>): boolean {
     return message.Direction === EDirection.In;
   }
 

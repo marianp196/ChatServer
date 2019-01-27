@@ -11,6 +11,7 @@ import { Guid } from "guid-typescript";
 import { Observable, Subscribable, Subscriber } from 'rxjs';
 import { TextMessageInput } from '../chatHub/chatProtokollDtos/TextMessageInput';
 import { MessageSenderService } from '../chatHub/message-sender.service';
+import { TextContent } from './ChatMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ChatService {
 
   private adressHandles: AdressHandler[] = [];
 
-  public SendTextMessage(target: Adress, message: String): Observable<MessageResponse> {
+  public SendTextMessage(target: Adress, message: TextContent): Observable<MessageResponse> {
 
     return new Observable<MessageResponse>(subscrib => {
       if (!this.IsConnected()) {
@@ -43,7 +44,7 @@ export class ChatService {
     });
   }
 
-  public RegisterOnAdressWithName(name: String, adress: Adress, onIncoming: (msg: ChatMessage) => void) {
+  public RegisterOnAdressWithName(name: String, adress: Adress, onIncoming: (msg: ChatMessage<TextContent>) => void) {
     if (!name) {
       name = Guid.create().toString();
     }
@@ -54,20 +55,20 @@ export class ChatService {
     this.adressHandles.push({Name: name, Adress: adress, Handle: onIncoming});
   }
 
-  public RegisterOnAdress(adress: Adress, onIncoming: (msg: ChatMessage) => void) {
+  public RegisterOnAdress(adress: Adress, onIncoming: (msg: ChatMessage<TextContent>) => void) {
     this.RegisterOnAdressWithName(Guid.create().toString(), adress, onIncoming);
   }
 
-  public RegisterOnUnknownAdress(onIncoming: (msg: ChatMessage) => void) {
+  public RegisterOnUnknownAdress(onIncoming: (msg: ChatMessage<TextContent>) => void) {
 
   }
 
-  private doSendMessage(subscrib: Subscriber<MessageResponse>, target: Adress, sender: Adress, text: String) {
-    var textMessage = new TextMessage();
+  private doSendMessage(subscrib: Subscriber<MessageResponse>, target: Adress, sender: Adress, content: TextContent) {
+    const textMessage = new TextMessage();
     textMessage.Id =  Guid.create().toString();
     textMessage.Sender = sender;
     textMessage.Target = target;
-    textMessage.Content = {Attechments: [], Text: [text]};
+    textMessage.Content = {Attechments: [], Text: [content.Message]};
 
     this.messageSender.SendMessage(textMessage).subscribe(() => {
       subscrib.next(new MessageResponse());
@@ -91,19 +92,19 @@ export class ChatService {
   });
   }
 
-  private createMessage(incoming: TextMessageInput): Observable<ChatMessage> {
-    return new Observable<ChatMessage>(sub => {
+  private createMessage(incoming: TextMessageInput): Observable<ChatMessage<TextContent>> {
+    return new Observable<ChatMessage<TextContent>>(sub => {
       const sender = incoming.Sender;
       console.log(sender);
       if (!sender) {
         sub.error('sender nicht gesetzt');
       }
       this.contactsService.GetContactByAdress(sender).subscribe(contact => {
-        const message = new ChatMessage();
+        const message = new ChatMessage<TextContent>();
         message.Direction = EDirection.In;
         message.PartnerContactId = contact.Id;
-        message.Message = (incoming.Content.Text && incoming.Content.Text.length > 0)
-                           ? incoming.Content.Text[0] : '';
+        message.Content = { Message: (incoming.Content.Text && incoming.Content.Text.length > 0)
+                           ? incoming.Content.Text[0] : '' };
         message.Timestamp = new Date(); //hier noch unterscheiden serverzeit.... clientzeit
 
         sub.next(message);
@@ -115,5 +116,5 @@ export class ChatService {
 class AdressHandler {
   public Name: String;
   public Adress: Adress;
-  public Handle: (msg: ChatMessage) => void;
+  public Handle: (msg: ChatMessage<TextContent>) => void;
 }
