@@ -1,4 +1,4 @@
-import { Contact } from './../../../services/contacts/contact';
+import { Contact, UserContact } from './../../../services/contacts/contact';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ export class ContactListItemComponent implements OnInit {
 
   constructor() { }
 
-  @Input() public Contact: Contact;
+  @Input() public Contact: UserContact;
 
   ngOnInit() {
   }

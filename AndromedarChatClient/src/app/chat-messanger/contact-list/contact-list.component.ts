@@ -1,4 +1,4 @@
-import { Contact } from './../../services/contacts/contact';
+import { Contact, UserContact } from './../../services/contacts/contact';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -27,8 +27,11 @@ export class ContactListComponent implements OnInit {
   ngOnInit() {
   }
 
+  public isUserContact(contact: Contact) {
+    return contact instanceof  UserContact;
+  }
+
   private clickListItem(contact: Contact): void {
-    console.log(contact.Name);
     this.Item = contact;
   }
 

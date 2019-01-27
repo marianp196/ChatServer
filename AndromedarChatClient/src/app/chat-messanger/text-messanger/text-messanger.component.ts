@@ -31,12 +31,12 @@ export class TextMessangerComponent implements OnInit {
   public Messages: ChatMessage<TextContent>[];
   public _contact: Contact;
 
-  public onSendMessage(msg: String): void {
+  public onSendMessage(msg: TextContent): void {
     const message = {
       PartnerContactId: this.Contact.Id,
       Direction: EDirection.Out,
       Timestamp: new Date(),
-      Content: {Message: msg}
+      Content: msg
     };
     this.messagePersist.Push(message).subscribe();
     this.chatService.SendTextMessage(this.Contact.Adress, message.Content).subscribe();

@@ -1,9 +1,12 @@
 import { Adress } from './../chatServices/chatHub/chatProtokollDtos/Adress';
 
 export class Contact {
-  Id: string;
+  Id: String;
   Adress: Adress;
-  Name: string;
-  Prename: string;
+}
+
+export class UserContact extends Contact {
+  Name: String;
+  Prename: String;
   DateOfBirth: Date;
 }

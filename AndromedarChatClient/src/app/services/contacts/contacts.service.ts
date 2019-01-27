@@ -1,7 +1,7 @@
 import { Adress } from './../chatServices/chatHub/chatProtokollDtos/Adress';
 import { EAdressType } from './../chatServices/chatHub/chatProtokollDtos/EAdressType';
 
-import { Contact } from './contact';
+import { Contact, UserContact } from './contact';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -42,44 +42,31 @@ export class ContactsService {
   }
 
   public initMoqData(): void {
-    let resultList = new Array<Contact>();
-    let contact = {
-      Id: '001',
-      Adress : {
-        AdressType: EAdressType.User,
-        Name: '001',
-        Server: 'MyHome'
-      } as Adress,
-      Name: 'Otto',
-      Prename: 'Otto',
-      DateOfBirth: null
-    };
-    resultList.push(contact);
-    contact = {
-      Id: '002',
-      Adress : {
-        AdressType: EAdressType.User,
-        Name: '002',
-        Server: 'MyHome'
-      } as Adress,
-      Name: 'Manfred',
-      Prename: 'Manfred',
-      DateOfBirth: null
-    };
+    const resultList = new Array<UserContact>();
+    let contact = this.createMoqUserContact('001', 'Otto');
     resultList.push(contact);
 
-    contact = {
-      Id: '003',
-      Adress : {
-        AdressType: EAdressType.User,
-        Name: '003',
-        Server: 'MyHome'
-      } as Adress,
-      Name: 'Helmut',
-      Prename: 'Helmut',
-      DateOfBirth: null
-    };
+    contact = this.createMoqUserContact('002', 'Manfred');
+    resultList.push(contact);
+
+    contact = this.createMoqUserContact('003', 'Hubert');
     resultList.push(contact);
     this.contacts = resultList;
+  }
+
+  private createMoqUserContact(id: String, name: String): UserContact {
+    const contact = new UserContact;
+
+    contact.Id = id;
+    contact.Adress = {
+        AdressType: EAdressType.User,
+        Name: id,
+        Server: 'MyHome'
+      } as Adress;
+    contact.Name = name;
+    contact.Prename = name;
+    contact.DateOfBirth = null;
+
+    return contact;
   }
 }

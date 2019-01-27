@@ -16,7 +16,7 @@ export class TextMessangerContentComponent implements OnInit {
   @Input() public Messages: ChatMessage<TextContent>[] = [];
   @Input() public IsGroup: boolean = false;//irwann über Contact regeln
 
-  @Output() public onNewMessage: EventEmitter<String> = new EventEmitter<String>();
+  @Output() public onNewMessage: EventEmitter<TextContent> = new EventEmitter<TextContent>();
 
   public messsageInput: String = '';
 
@@ -28,7 +28,7 @@ export class TextMessangerContentComponent implements OnInit {
     if (this.messsageInput === '') {
       return;
     }
-    this.onNewMessage.emit(this.messsageInput);
+    this.onNewMessage.emit({Message: this.messsageInput});
     this.messsageInput = '';
   }
 

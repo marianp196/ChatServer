@@ -1,6 +1,9 @@
 <div class="contact-list">
-  <app-contact-list-item *ngFor="let contact of Contacts"
+  <div *ngFor="let contact of Contacts">
+      <app-contact-list-item *ngIf="isUserContact(contact)"
           class="contact-list-item" [Contact]="contact"
           (click)="clickListItem(contact)">
-  </app-contact-list-item>
+      </app-contact-list-item>
+  </div>
+
 </div>

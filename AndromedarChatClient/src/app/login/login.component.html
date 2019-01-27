@@ -1,5 +1,7 @@
-<div>
-  Username: <input matInput [(ngModel)]="user" ><br>
-  Password: <input type="password" [(ngModel)]="password"><br>
-  <button mat-button (click)="onClick()">Sign in</button>
+<div class="login">
+    <div class="login-dialog">
+        <input matInput [(ngModel)]="user" placeholder="Username" ><br>
+        <input type="password" [(ngModel)]="password" placeholder="Password"><br>
+        <button mat-button (click)="onClick()">Sign in</button>
+    </div>
 </div>
